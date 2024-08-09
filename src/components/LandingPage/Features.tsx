@@ -4,7 +4,7 @@ import { AI, AIChat, Document, Inteface, MultiDocument } from "@/utils/Icon";
 import { useEffect, useState } from "react";
 
 const Features = () => {
-  const [viewWidth, setViewWidth] = useState(window.innerWidth);
+  const [viewWidth, setViewWidth] = useState(0);
   const feature = [
     {
       icon: AI,
@@ -39,10 +39,15 @@ const Features = () => {
   ];
 
   useEffect(() => {
-    const handleResize = () => setViewWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
+    if (typeof window !== "undefined") {
+      const handleResize = () => setViewWidth(window.innerWidth);
+      window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
+      // Set the initial width
+      handleResize();
+
+      return () => window.removeEventListener("resize", handleResize);
+    }
   }, []);
 
   const renderFeatures = () => {

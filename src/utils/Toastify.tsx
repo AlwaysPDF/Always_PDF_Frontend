@@ -31,7 +31,6 @@ const Toastify: React.FC<ToastifyProps> = ({
 
   useEffect(() => {
     showToast();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <ToastContainer />;

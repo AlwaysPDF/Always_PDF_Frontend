@@ -45,14 +45,12 @@ const DashMainNav = () => {
         clearInterval(interval);
       };
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (typeof navigator !== "undefined" && navigator.onLine && !isOnline) {
       checkInternetConnection();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastOnlineStatus, isOnline]);
 
   return (

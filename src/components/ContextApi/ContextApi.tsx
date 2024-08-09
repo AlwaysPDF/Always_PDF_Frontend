@@ -240,7 +240,6 @@ const ContextProvider: React.FC<AppProviderProps> = ({ children }) => {
         hasMinLength: false,
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userDetails.password]);
 
   // the onchange function
