@@ -3,6 +3,7 @@ import { FiUpload } from "react-icons/fi";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { useAppContext } from "../ContextApi/ContextApi";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const DashMainNav = () => {
   const { setIsModalOpen } = useAppContext();
@@ -44,12 +45,14 @@ const DashMainNav = () => {
         clearInterval(interval);
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (typeof navigator !== "undefined" && navigator.onLine && !isOnline) {
       checkInternetConnection();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastOnlineStatus, isOnline]);
 
   return (
@@ -59,7 +62,7 @@ const DashMainNav = () => {
           <main className="flex justify-between items-center py- w-full">
             <aside className="flex justify-start items-center flex-col">
               <div>
-                <img src="" alt="" />
+                <Image src="" alt="" />
               </div>
               <div className="">
                 <h1 className="text-closedark font-Ubuntu font-medium text-lg mb-0 pb-0">

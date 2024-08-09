@@ -11,9 +11,8 @@ const FullTab = () => {
       <div>
         <main className="flex justify-center items-center mt-4">
           {tabs?.map((tab, i) => (
-            <div className=" first:border-r border-grey">
+            <div key={i} className=" first:border-r border-grey">
               <h1
-                key={i}
                 onClick={() => setTabName(tab)}
                 className={`${tab === tabName ? "text-offblack border-b-2 border-offblack" : "text-grey"} font-Ubuntu font-medium cursor-pointer mx-10 px-4`}
               >

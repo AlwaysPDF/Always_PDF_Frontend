@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -29,8 +29,9 @@ const Toastify: React.FC<ToastifyProps> = ({
     });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     showToast();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <ToastContainer />;

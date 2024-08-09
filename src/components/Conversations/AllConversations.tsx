@@ -70,6 +70,7 @@ const AllConversations: React.FC<Token> = ({ token }) => {
     };
 
     verifyEmail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
   return (
     <section className="flex justify-center items-center w-full">
