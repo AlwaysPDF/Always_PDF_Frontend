@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
   }
   // Redirect authenticated users trying to access auth routes
   if (accessToken && request.nextUrl.pathname.startsWith("/auth")) {
-    return NextResponse.redirect(new URL("/dashboard/settings", request.url));
+    return NextResponse.redirect(new URL("/dashboard/my-documents", request.url));
   }
   // const accessToken
   return response;

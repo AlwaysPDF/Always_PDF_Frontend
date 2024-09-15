@@ -62,7 +62,7 @@ const Features = () => {
   };
   return (
     <section className="flex justify-center items-center w-full">
-      <div className="flex justify-center items-center w-[80%] border flex-col py-16">
+      <div className="flex justify-center items-center w-[80%] llg:w-[95%] flex-col py-16">
         <aside className="relative  w-[14%] flex justify-center items-center mb-12">
           <h1 className="font-Ubuntu font-semibold text-basicBlue text-3xl">
             Features

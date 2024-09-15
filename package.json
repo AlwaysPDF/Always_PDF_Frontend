@@ -12,6 +12,7 @@
     "format:fix": "prettier . --write"
   },
   "dependencies": {
+    "@cyntler/react-doc-viewer": "^1.17.0",
     "@types/js-cookie": "^3.0.6",
     "antd": "^5.19.0",
     "axios": "^1.7.2",

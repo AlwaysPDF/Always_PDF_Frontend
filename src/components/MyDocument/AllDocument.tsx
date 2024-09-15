@@ -1,13 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Modal } from "antd";
 import FullTab from "./Tab/FullTab";
 
 import NoDocument from "./NoDocument";
 import FilledDocument from "./FilledDocument";
 import { useAppContext } from "../ContextApi/ContextApi";
-import { axiosInstanceWithHeader } from "@/utils/AxiosHeader";
 
 const AllDocument = () => {
   const { isModalOpen, setIsModalOpen, documents } = useAppContext();

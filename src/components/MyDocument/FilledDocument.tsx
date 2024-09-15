@@ -6,6 +6,10 @@ import { useRouter } from "next/navigation";
 
 import { format } from "date-fns";
 import { useState } from "react";
+import { axiosInstanceWithHeader } from "@/utils/AxiosHeader";
+import SingleDocument from "./SingleDocument";
+
+// import { RiDeleteBin5Line } from "react-icons/ri";
 
 const FilledDocument = () => {
   const router = useRouter();
@@ -32,11 +36,24 @@ const FilledDocument = () => {
     }
   };
 
+  const handleDelete = async (documentId: string) => {
+    try {
+      const response = await axiosInstanceWithHeader.delete(
+        `/documentUpload/document/${documentId}`
+      );
+      console.log(response.data.msg);
+    } catch (error) {
+      console.error("Error deleting file:", error);
+    }finally{
+
+    }
+  };
+
   return (
     <section className="flex justify-center items-center w-full">
       <div className="grid grid-cols-2 gap-20 w-full">
         <aside className="w-full bg-white rounded-xl flex justify-center items-center">
-          <div className=" w-[80%]">
+          <div className=" w-[90%]">
             <div className="w-full">
               <h1 className="font-Ubuntu text-[#151515] font-bold text-2xl">
                 My Documents
@@ -46,46 +63,21 @@ const FilledDocument = () => {
                   type="text"
                   placeholder="Search documents"
                   onChange={(e) => setSearchContact(e.target.value)}
+                  className="w-full py-2 px-2 focus:outline-none border border-[#DEDEDE] rounded-md text-grey text-sm mt-2"
                 />
               </div>
             </div>
-            <main className="w-full">
+            <main className="w-full mt-8 overflow-y-scroll h-[60vh] filled-document">
               <div className="grid grid-cols-1 gap-4 w-full">
                 {documents?.map((doc, i) => (
-                  <div
+                  <SingleDocument
+                    doc={doc}
                     key={i}
-                    className="flex justify-start items-center border-b border-[#DEDEDE] py-4"
-                    // onClick={() => setIsModalOpen && setIsModalOpen(true)}
-                  >
-                    <aside>
-                      <div>
-                        <h1 className="font-semibold font-Inter ">
-                          {doc?.fileName}
-                        </h1>
-                        <div className="flex justify-start items-center">
-                          <p className="font-Inter text-[#372d2d] text-sm ">
-                            {formatDate(doc?.uploadDate)}
-                          </p>
-                          <div className="size-[6px] bg-[#98A2B3] rounded-full mx-2"></div>
-                          <p className="font-Inter text-[#372d2d] text-sm ">
-                            {formatFileSize(doc?.fileSize)}
-                          </p>
-                        </div>
-                      </div>
-                    </aside>
-                    <aside>
-                      <button
-                        onClick={() => handleNavigate(doc?._id, doc?.fileUrl)}
-                      >
-                        view
-                      </button>
-                    </aside>
-                    {/* <img
-                    className="w-[100%] h-[100%]"
-                    src={doc.url}
-                    alt={doc.name}
-                  /> */}
-                  </div>
+                    formatDate={formatDate}
+                    formatFileSize={formatFileSize}
+                    handleNavigate={handleNavigate}
+                    handleDelete={handleDelete}
+                  />
                 ))}
               </div>
             </main>

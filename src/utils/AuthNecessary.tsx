@@ -19,9 +19,13 @@ export const AuthHeader: React.FC<IsAuthNecessary> = ({ isAuth }) => {
     <section className="flex justify-center items-center">
       <div className="flex justify-center items-center flex-col">
         <div className="w-[50%]">
-          <Image src={fullColorLogo} alt="Full Color Logo" className="w-full h-full" />
+          <Image
+            src={fullColorLogo}
+            alt="Full Color Logo"
+            className="w-full h-full"
+          />
         </div>
-        <p className="font-Ubuntu text-closedark text-[16px] mt-4 mb-1">
+        <p className="font-Ubuntu text-offblack font-medium text-[16px] mt-4 mb-2">
           {isAuth === "email"
             ? "Welcome to EverPDF"
             : isAuth === "verify"
@@ -30,7 +34,7 @@ export const AuthHeader: React.FC<IsAuthNecessary> = ({ isAuth }) => {
                 ? "Input your details to create your profile"
                 : "Glad to have you back!"}
         </p>
-        <h1 className="text-deepblue font-Ubuntu font-medium text-2xl mb-6">
+        <h1 className="text-basicBlue font-Ubuntu font-semibold text-xl mb-6 text-center">
           {isAuth === "email"
             ? "Create a EverPDF Account"
             : isAuth === "verify"
@@ -77,15 +81,15 @@ export const AuthButton: React.FC<IsButton> = ({
 export const AuthIsSignUp: React.FC<IsAuthNecessary> = ({ isAuth }) => {
   return (
     <div>
-      <p className="font-Ubuntu font-medium text-sm ">
+      <p className="font-Ubuntu font-semibold text-sm ">
         {isAuth !== "signin"
           ? "Already have an account?"
           : "Don't have an account?"}
         <Link
-          className="ml-2 text-deepblue"
-          href={isAuth !== "signin" ? "/auth/signin" : "/auth/email"}
+          className="ml-2 text-basicBlue font-Ubuntu font-semibold"
+          href={(isAuth !== "email" && isAuth !== "signin") ? "/auth/signin" : "/auth/email"}
         >
-          {isAuth !== "signin" ? "Sign In" : "Sign up here!"}
+          {(isAuth !== "email" && isAuth !== "signin") ? "Sign In" : "Sign up here!"}
         </Link>
       </p>
     </div>

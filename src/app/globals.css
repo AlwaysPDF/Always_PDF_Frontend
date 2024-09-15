@@ -14,6 +14,18 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  border: none;
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cf9414;
+  height: 1rem;
+}
+
 body {
   font-family: "Ubuntu", sans-serif;
 }
@@ -40,4 +52,31 @@ body {
   border: 2px dashed #d0d5dd !important;
   background: transparent !important;
   border-radius: 1rem !important;
+}
+
+.bg-gradient-price {
+  background: linear-gradient(
+    270deg,
+    rgba(218, 237, 255, 0.53) 0%,
+    #ddeeff 100%
+  );
+}
+
+.price-white {
+  background-color: white;
+}
+
+.price-gradient {
+  background: linear-gradient(180deg, #003366 0%, #0066cc 100%);
+}
+
+.filled-document::-webkit-scrollbar {
+  width: 5px;
+  display: none;
+}
+
+.stepListShadow {
+  /* box-shadow: 0px 4.88px 7.32px -2.44px #79bcff0d; */
+
+  box-shadow: 0px 12.2px 18.3px -3.66px #79bcff1a;
 }

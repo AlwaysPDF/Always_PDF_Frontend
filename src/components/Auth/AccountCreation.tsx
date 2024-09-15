@@ -53,8 +53,6 @@ const AccountCreation = () => {
     if (setUserDetails && newUserDetails) {
       setUserDetails(newUserDetails); // Update userDetails state
     }
-    console.log(newUserDetails);
-
     if (setIsActive) {
       const { fName = "", lName = "", password = "" } = newUserDetails;
 
@@ -75,6 +73,26 @@ const AccountCreation = () => {
         setIsActive(false);
       }
       console.log(isActive);
+    }
+
+    if (name === "password") {
+      if (value) {
+        setCriteria?.({
+          hasLowerCase: /[a-z]/.test(value),
+          hasUpperCase: /[A-Z]/.test(value),
+          hasNumber: /[0-9]/.test(value),
+          hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(value),
+          hasMinLength: value.length >= 8,
+        });
+      } else {
+        setCriteria?.({
+          hasLowerCase: false,
+          hasUpperCase: false,
+          hasNumber: false,
+          hasSpecialChar: false,
+          hasMinLength: false,
+        });
+      }
     }
   };
 
@@ -231,7 +249,7 @@ const AccountCreation = () => {
             bottom="mb-2"
           />
           <div className="mb-10 mt-2 font-Ubuntu w-full">
-            <p className="text-[#121212] mb-2 font-medium font-Ubuntu text-[16px]">
+            <p className="text-[#999999] mb-2 font-medium font-Ubuntu text-[16px]">
               Your password should contain:
             </p>
             <label

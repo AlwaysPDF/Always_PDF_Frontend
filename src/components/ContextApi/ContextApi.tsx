@@ -47,6 +47,14 @@ interface ResetDetails {
   confirmPassword: string;
 }
 
+interface UserData {
+  userId: string;
+  email: string;
+  fName: string;
+  lName: string;
+  isProfileComplete: boolean;
+}
+
 // type Action =
 //   | { type: "SET_SHOW_TOAST"; payload: boolean }
 //   | { type: "SET_TOAST_MESSAGE"; payload: ToastMessage };
@@ -81,11 +89,15 @@ interface MyContextType {
   setShowSidebar?: (value: boolean) => void;
   settingsNav?: string;
   setSettingsNav?: (value: string) => void;
+  currentUser?: UserData | null;
+  setCurrentUser?: (value: UserData | null) => void;
   isModalOpen?: boolean;
   setIsModalOpen?: (value: boolean) => void;
   documents?: DocumentData[];
   pdfUrl?: string;
   setPdfUrl?: (value: string) => void;
+  pdfText?: string;
+  setPdfText?: (value: string) => void;
   // dispatch: Dispatch<Action>;
 }
 
@@ -125,11 +137,15 @@ const initialState: MyContextType = {
   setShowSidebar: () => {},
   settingsNav: "Basic Information",
   setSettingsNav: () => {},
+  currentUser: null,
+  setCurrentUser: () => {},
   isModalOpen: false,
   setIsModalOpen: () => {},
   documents: [] as DocumentData[],
   pdfUrl: "",
   setPdfUrl: () => {},
+  pdfText: "",
+  setPdfText: () => {},
   // dispatch: () => {},
 };
 
@@ -171,6 +187,7 @@ const ContextProvider: React.FC<AppProviderProps> = ({ children }) => {
     text: "",
     type: "info",
   });
+  const [pdfText, setPdfText] = useState<string>("");
 
   const [userDetails, setUserDetails] = useState<UserDetails>({
     fName: "",
@@ -217,30 +234,30 @@ const ContextProvider: React.FC<AppProviderProps> = ({ children }) => {
     }
   };
 
-  const isPassword = userDetails.password === "";
+  // const isPassword = userDetails.password === "";
 
-  useEffect(() => {
-    if (isPassword) {
-      return;
-    }
-    if (userDetails.password) {
-      setCriteria({
-        hasLowerCase: /[a-z]/.test(userDetails.password),
-        hasUpperCase: /[A-Z]/.test(userDetails.password),
-        hasNumber: /[0-9]/.test(userDetails.password),
-        hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(userDetails.password),
-        hasMinLength: userDetails.password.length >= 8,
-      });
-    } else {
-      setCriteria({
-        hasLowerCase: false,
-        hasUpperCase: false,
-        hasNumber: false,
-        hasSpecialChar: false,
-        hasMinLength: false,
-      });
-    }
-  }, [userDetails.password]);
+  // useEffect(() => {
+  //   if (isPassword) {
+  //     return;
+  //   }
+  //   if (userDetails.password) {
+  //     setCriteria({
+  //       hasLowerCase: /[a-z]/.test(userDetails.password),
+  //       hasUpperCase: /[A-Z]/.test(userDetails.password),
+  //       hasNumber: /[0-9]/.test(userDetails.password),
+  //       hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(userDetails.password),
+  //       hasMinLength: userDetails.password.length >= 8,
+  //     });
+  //   } else {
+  //     setCriteria({
+  //       hasLowerCase: false,
+  //       hasUpperCase: false,
+  //       hasNumber: false,
+  //       hasSpecialChar: false,
+  //       hasMinLength: false,
+  //     });
+  //   }
+  // }, [userDetails.password]);
 
   // the onchange function
   const handleResetPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -321,26 +338,25 @@ const ContextProvider: React.FC<AppProviderProps> = ({ children }) => {
     getDocuments();
   }, []);
 
-  // const handleCurrentUser = async () => {
-  //   try {
-  //     const response = await axiosInstanceWithHeader.get("/users/current-user");
-  //     const data = await response.data;
-  //     console.log(data);
+  const handleCurrentUser = async () => {
+    try {
+      const response = await axiosInstanceWithHeader.get("/user/currentUser");
+      const data = response.data;
+      
+      if (data.success === true) {
+        setCurrentUser(data.user);
+      } else {
+        console.log("Failed to fetch user data.");
+      }
+      // return data;
+    } catch {
+      console.log("Error fetching data");
+    }
+  };
 
-  //     if (data.status === "success") {
-  //       setCurrentUser(data.data);
-  //       console.log(currentUser);
-  //     }
-
-  //     // return data;
-  //   } catch {
-  //     console.log("Error fetching data");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   handleCurrentUser(); // Call once on component mount
-  // }, [router]);
+  useEffect(() => {
+    handleCurrentUser(); // Call once on component mount
+  }, [router]);
 
   const contextValue: MyContextType = {
     ...state,
@@ -376,6 +392,9 @@ const ContextProvider: React.FC<AppProviderProps> = ({ children }) => {
     isModalOpen,
     setIsModalOpen,
     documents,
+    pdfText,
+    setPdfText,
+    currentUser,
   };
 
   return (

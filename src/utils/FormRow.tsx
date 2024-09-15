@@ -50,7 +50,7 @@ const FormRow: React.FC<FormRowType> = ({
         <div className={`w-full h-full ${!password && "text-start"} ${bottom}`}>
           <label
             htmlFor={name}
-            className={`mb-2 flex items-center  text-sm font-Helvetica text-offblack`}
+            className={`mb-2 flex items-center font-medium text-sm font-Ubuntu text-offblack`}
             // ${
             //   formErrors[name] ? "text-errorRed" : "text-grey"
             // }
@@ -64,15 +64,17 @@ const FormRow: React.FC<FormRowType> = ({
                 formErrors[name] ? "border-errorRed" : "border-[#E2E4E9]"
               } text-[#4F4F4F] text-sm rounded-lg flex justify-between items-center w-full font-medium px-2 focus:border focus:border-black `}
             >
-              {name === "email" ? (
-                <MdOutlineEmail />
-              ) : name === "lName" ? (
-                <FaRegUser />
-              ) : name === "fName" ? (
-                <FaRegUser />
-              ) : (
-                <TiKeyboard />
-              )}
+              <span className="mr-2">
+                {name === "email" ? (
+                  <MdOutlineEmail className="text-xl text-[#999999]" />
+                ) : name === "lName" ? (
+                  <FaRegUser className="text-xl text-[#999999]" />
+                ) : name === "fName" ? (
+                  <FaRegUser className="text-xl text-[#999999]" />
+                ) : (
+                  <TiKeyboard className="text-xl text-[#999999]" />
+                )}
+              </span>
               <input
                 type={type}
                 value={value}
@@ -91,7 +93,9 @@ const FormRow: React.FC<FormRowType> = ({
                 formErrors[name] ? "border-errorRed" : "border-[#E2E4E9]"
               } text-[#4F4F4F] text-sm rounded-lg flex justify-between items-center w-full h-10 font-semibold px-2`}
             >
-              <HiOutlineKey />
+              <span className="mr-2">
+                <HiOutlineKey className="text-xl text-[#999999]" />
+              </span>
               <input
                 type={passwordActive ? "text" : "password"}
                 value={value}
@@ -103,11 +107,11 @@ const FormRow: React.FC<FormRowType> = ({
               />
               {passwordActive ? (
                 <p onClick={() => handlePassword()}>
-                  <FiEyeOff />
+                  <FiEyeOff className="text-xl text-[#999999]" />
                 </p>
               ) : (
                 <p onClick={() => handlePassword()}>
-                  <FiEye />
+                  <FiEye className="text-xl text-[#999999]" />
                 </p>
               )}
             </div>
