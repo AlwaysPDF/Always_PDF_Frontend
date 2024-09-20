@@ -1,8 +1,11 @@
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { Socket } from "socket.io-client";
 import ChatInput from "./ChatInput";
-import { axiosInstance, axiosInstanceWithHeader } from "@/utils/AxiosHeader";
+import { axiosInstanceWithHeader } from "@/utils/AxiosHeader";
 import { useAppContext } from "../ContextApi/ContextApi";
+
+import halfLogo from "../../../public/assets/halfLogo.png";
+import Image from "next/image";
 
 type Chat = {
   // Define the structure of the chat if needed
@@ -105,13 +108,16 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     if (socketRef.current.socket) {
       socketRef.current.socket.on("msg-recieve", (msg) => {
         setArrivalMessage({ fromSelf: false, message: msg });
+        console.log(msg)
       });
     }
-  }, []);
+  }, [socketRef.current.socket]);
 
   useEffect(() => {
     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage]);
+
+  console.log(arrivalMessage)
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -119,28 +125,41 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
 
   // Your component logic here
   return (
-    <div>
-      <div className="p-[1rem_2rem] flex flex-col gap-4 overflow-auto">
+    <main className="w-full flex justify-center items-center flex-col">
+      <aside className="-[1rem_2rem] flex flex-col gap-4 w-full">
         {messages.map((message, i) => {
           return (
-            <div ref={scrollRef} key={i}>
+            <div ref={scrollRef} key={i} className="w-full">
               <div
-                className={`flex items-center ${message.fromSelf ? "justify-end" : "justify-start"}`}
+                className={`flex items-center max-w-full ${message.fromSelf ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={
-                    "max-w-[40%] llg:max-w-[70%] text-balance p-2 text-lg rounded-lg text-[color: #d1d1d1] "
-                  }
+                  className={`flex items-start p-2 text-lg rounded-md ${message.fromSelf ? "justify-end border border-[#DEDEDE] max-w-[85%] w-[85%]" : "justify-start max-w-[85%] w-[85%]"}`}
                 >
-                  <p>{message.message}</p>
+                  {!message?.fromSelf && (
+                    <div
+                      className={`flex justify-center items-center ${!message?.fromSelf && "bg-basicBlue size-[40px] rounded-full mr-2"}`}
+                    >
+                      <Image
+                        src={halfLogo}
+                        alt="White version of company logo"
+                        className="size-[70%]"
+                      />
+                    </div>
+                  )}
+                  <p className="w-full font-Ubuntu text-offblack">
+                    {message.message}
+                  </p>
                 </div>
               </div>
             </div>
           );
         })}
-      </div>
-      <ChatInput handleSendMsg={handleSendMsg} />
-    </div>
+      </aside>
+      <aside className="w-[30%] border flex justify-end fixed bottom-0">
+        <ChatInput handleSendMsg={handleSendMsg} />
+      </aside>
+    </main>
   );
 };
 

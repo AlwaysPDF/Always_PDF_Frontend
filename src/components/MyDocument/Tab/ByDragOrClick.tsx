@@ -24,6 +24,7 @@ const ByDragOrClick = () => {
     setShowToast,
     setIsModalOpen,
     handleToastClose,
+    getDocuments,
   } = useAppContext();
 
   const [documentInfo, setDocumentInfo] = useState({
@@ -145,18 +146,13 @@ const ByDragOrClick = () => {
       console.log(response);
 
       if (response?.data?.success === true) {
-        if (setToastMessage) {
-          setToastMessage({
-            text: response?.data?.msg || "Document uploaded successfully",
-            type: "success",
-          });
-        }
-        if (setShowToast) {
-          setShowToast(true);
-        }
-        if (setIsModalOpen) {
-          setIsModalOpen(false);
-        }
+        setToastMessage?.({
+          text: response?.data?.msg || "Document uploaded successfully",
+          type: "success",
+        });
+        setShowToast?.(true);
+        setIsModalOpen?.(false);
+        getDocuments?.();
       }
     } catch (error) {
       console.error("Failed to send document info:", error);

@@ -33,9 +33,9 @@ const SingleDocument: React.FC<any> = ({
           priority
         />
       </aside>
-      <aside className="max-w-[300px] w-[65%]">
+      <aside className="max-w-[300px] lmd:max-w-[200px] w-[65%]">
         <div>
-          <h1 className="font-semibold font-Inter text-sm">{doc?.fileName}</h1>
+          <h1 className="font-semibold font-Inter text-sm lsm:text-[12px]">{doc?.fileName}</h1>
           <div className="flex justify-start items-center">
             <p className="font-Inter text-[#98A2B3] text-sm ">
               {formatDate(doc?.uploadDate)}

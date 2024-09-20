@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 
 // import { FiUpload } from "react-icons/fi";
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
-// import { useAppContext } from "../ContextApi/ContextApi";
 import { useEffect, useState } from "react";
+import { useAppContext } from "../ContextApi/ContextApi";
 import Image from "next/image";
 
 const DashMainNav = () => {
-  // const { setIsModalOpen } = useAppContext();
+  const { showSidebar, setShowSidebar } = useAppContext();
   const router = useRouter();
 
   const [isOnline, setIsOnline] = useState(false);
@@ -65,12 +65,28 @@ const DashMainNav = () => {
     router.push("/auth/signin");
   };
 
+  const handleClick = () => {
+    setShowSidebar?.(!showSidebar);
+  };
+
   return (
     <nav className=" w-full fixed top-0 h-[15vh]">
-      <div className="lg:pl-[220px] flex justify-center items-center  w-full h-full lg:w-[95%] z-[500] bg-white">
-        <div className="w-[95vw] h-full flex justify-center items-center border-b border-borderGrey py-4">
+      <div className="lg:pl-[220px] flex justify-center items-center  w-full h-full lg:w-[95%] z-[9999999] bg-white">
+        <div className="w-[95vw] llg:w-[95%] h-full flex justify-center items-center border-b border-borderGrey py-4">
           <main className="flex justify-between items-center py- w-full">
-            <aside className="flex justify-start items-center flex-col">
+            <aside className="hidden justify-start items-center flex-col llg:flex">
+              <button
+                className="md:hidden cursor-pointer "
+                onClick={handleClick}
+              >
+                {showSidebar ? (
+                  <i className="fa-solid fa-x text-basicBlue"></i>
+                ) : (
+                  <i className="fa-solid fa-bars text-basicBlue"></i>
+                )}
+              </button>
+            </aside>
+            <aside className="flex justify-start items-center flex-col llg:hidden">
               <div>
                 <Image src="" alt="" />
               </div>
@@ -97,7 +113,7 @@ const DashMainNav = () => {
               </button> */}
               <button
                 type="submit"
-                className="font-Ubuntu font-medium border border-basicBlue text-basicBlue rounded-md px-4 py-2 flex justify-center items-center"
+                className="font-Ubuntu font-medium border border-basicBlue text-basicBlue rounded-md px-4 py-2 flex justify-center items-center llg:hidden"
               >
                 <IoChatbubbleEllipsesOutline className="mr-2" /> Past
                 Conversations

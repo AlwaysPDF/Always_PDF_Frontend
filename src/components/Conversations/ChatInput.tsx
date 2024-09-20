@@ -42,29 +42,29 @@ const ChatInput: React.FC<ChatFunctionDetails> = ({ handleSendMsg }) => {
 
   return (
     // <Container>
-    <section>
+    <section className="w-full">
       <div className="button-container w-full">
         <div className="emoji">
           {/* <BsEmojiSmileFill onClick={handleEmojiPickerhideShow} />
           {showEmojiPicker && <Picker onEmojiClick={handleEmojiClick} />} */}
         </div>
       </div>
-      <form className="input-container flex justify-between items-center w-full">
-        <input
-          type="text"
-          placeholder="Input your question about your document"
-          onChange={(e) => setQuestion(e.target.value)}
-          value={question}
-          className="rounded-lg focus:outline-none w-[91%] border border-[#DEDEDE] px-4 py-2"
-        />
-        <button
-          type="submit"
-          onClick={(e) => sendChat(e)}
-          className="bg-basicBlue w-[8%] py-3 flex justify-center items-center rounded-lg"
-        >
-          {loadingActive ? "active" : <IoMdSend className="text-white" />}
-        </button>
-      </form>
+        <form className=" input-container flex justify-between items-center w-full">
+          <input
+            type="text"
+            placeholder="Input your question about your document"
+            onChange={(e) => setQuestion(e.target.value)}
+            value={question}
+            className="rounded-lg focus:outline-none w-[91%] border border-[#DEDEDE] px-4 py-2"
+          />
+          <button
+            type="submit"
+            onClick={(e) => sendChat(e)}
+            className="bg-basicBlue w-[8%] py-3 flex justify-center items-center rounded-lg"
+          >
+            {loadingActive ? "active" : <IoMdSend className="text-white" />}
+          </button>
+        </form>
     </section>
     // </Container>
   );

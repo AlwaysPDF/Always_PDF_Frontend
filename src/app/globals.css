@@ -80,3 +80,7 @@ body {
 
   box-shadow: 0px 12.2px 18.3px -3.66px #79bcff1a;
 }
+
+.noscrollbar::-webkit-scrollbar {
+  display: none;
+}

@@ -19,7 +19,7 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
             <DashBigSideNav />
             <div className="w-full flex justify-center items-center">
               <div
-                className={`dashboard-page  w-[95vw] mx-auto my-[10vh]  lg:w-[95%] max-w-[95vw]`}
+                className={`dashboard-page  w-[95vw] mx-auto my-[10vh]  lg:w-[95%] llg:w-full`}
               >
                   <DashMainNav />
                 {children}

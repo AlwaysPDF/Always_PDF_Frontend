@@ -44,14 +44,13 @@ const FilledDocument = () => {
       console.log(response.data.msg);
     } catch (error) {
       console.error("Error deleting file:", error);
-    }finally{
-
+    } finally {
     }
   };
 
   return (
     <section className="flex justify-center items-center w-full">
-      <div className="grid grid-cols-2 gap-20 w-full">
+      <div className="grid grid-cols-2 llg:grid-cols-1 gap-20 llg:gap-6 w-full llg:flex lg:flex-col-reverse llg:flex-col-reverse">
         <aside className="w-full bg-white rounded-xl flex justify-center items-center">
           <div className=" w-[90%]">
             <div className="w-full">
@@ -83,9 +82,9 @@ const FilledDocument = () => {
             </main>
           </div>
         </aside>
-        <aside className=" h-[80vh] flex justify-center items-start flex-col">
-          <div className="w-[80%]">
-            <h1 className="font-Ubuntu text-[#151515] font-bold text-3xl mb-2">
+        <aside className="h-[80vh] llg:h-auto flex justify-center items-start llg:items-center llg:text-center flex-col py-8 w-full">
+          <div className="w-[80%] llg:w-[90%] llg:flex llg:flex-col justify-center items-center">
+            <h1 className="font-Ubuntu text-[#151515] font-bold text-3xl mb-2 lmd:text-2xl">
               Select a Document
             </h1>
             <p className="font-Ubuntu text-sm text-[#7A7A7A] font-normal">

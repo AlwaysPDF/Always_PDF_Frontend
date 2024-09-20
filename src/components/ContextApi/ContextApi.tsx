@@ -53,6 +53,7 @@ interface UserData {
   fName: string;
   lName: string;
   isProfileComplete: boolean;
+  tier: string;
 }
 
 // type Action =
@@ -98,6 +99,7 @@ interface MyContextType {
   setPdfUrl?: (value: string) => void;
   pdfText?: string;
   setPdfText?: (value: string) => void;
+  getDocuments?: () => any;
   // dispatch: Dispatch<Action>;
 }
 
@@ -146,6 +148,7 @@ const initialState: MyContextType = {
   setPdfUrl: () => {},
   pdfText: "",
   setPdfText: () => {},
+  getDocuments: () => {},
   // dispatch: () => {},
 };
 
@@ -315,7 +318,7 @@ const ContextProvider: React.FC<AppProviderProps> = ({ children }) => {
       const documents = response.data;
 
       // Handle the documents data
-      console.log("Fetched documents:", documents);
+      // console.log("Fetched documents:", documents);
       return documents.documents;
     } catch (error) {
       console.error("Error fetching documents:", error);
@@ -323,18 +326,18 @@ const ContextProvider: React.FC<AppProviderProps> = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    const getDocuments = async () => {
-      try {
-        const docs = await fetchAllDocuments();
-        setDocuments(docs);
-      } catch (err) {
-        // setError(err);
-      } finally {
-        // setLoading(false);
-      }
-    };
+  const getDocuments = async () => {
+    try {
+      const docs = await fetchAllDocuments();
+      setDocuments(docs);
+    } catch (err) {
+      // setError(err);
+    } finally {
+      // setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     getDocuments();
   }, []);
 
@@ -342,7 +345,7 @@ const ContextProvider: React.FC<AppProviderProps> = ({ children }) => {
     try {
       const response = await axiosInstanceWithHeader.get("/user/currentUser");
       const data = response.data;
-      
+
       if (data.success === true) {
         setCurrentUser(data.user);
       } else {
@@ -395,6 +398,7 @@ const ContextProvider: React.FC<AppProviderProps> = ({ children }) => {
     pdfText,
     setPdfText,
     currentUser,
+    getDocuments,
   };
 
   return (

@@ -21,6 +21,7 @@ const ByUrl = () => {
     setIsModalOpen,
     loadingActive,
     setLoadingActive,
+    getDocuments,
   } = useAppContext();
   const [fileUrl, setFileUrl] = useState<string>("");
 
@@ -31,21 +32,14 @@ const ByUrl = () => {
         "/documentUpload/uploadDocumentByURL",
         { fileUrl }
       );
-      console.log(response);
-
       if (response?.data?.success === true) {
-        if (setToastMessage) {
-          setToastMessage({
-            text: response?.data?.msg || "Document uploaded successfully",
-            type: "success",
-          });
-        }
-        if (setShowToast) {
-          setShowToast(true);
-        }
-        if (setIsModalOpen) {
-          setIsModalOpen(false);
-        }
+        setToastMessage?.({
+          text: response?.data?.msg || "Document uploaded successfully",
+          type: "success",
+        });
+        setShowToast?.(true);
+        setIsModalOpen?.(false);
+        getDocuments?.();
       }
     } catch (error) {
       console.error("Failed to send document info:", error);
@@ -69,6 +63,7 @@ const ByUrl = () => {
                 type="url"
                 name=""
                 id=""
+                value={fileUrl}
                 placeholder="https://docs.google.com/yourdocument"
                 className="px-2 outline-none focus:outline-none flex-1"
                 onChange={(e) => {
