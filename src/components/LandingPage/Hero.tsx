@@ -13,7 +13,7 @@ const Hero = () => {
   const router = useRouter();
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    router.push("/my-documents");
+    router.push("/dashboard/my-documents");
   };
 
   return (
