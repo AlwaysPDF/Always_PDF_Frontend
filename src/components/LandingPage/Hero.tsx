@@ -26,9 +26,9 @@ const Hero = () => {
             <span className="textGradient font-medium">conversations</span>
           </h1>
           <div className="flex justify-start items-center mt-8">
-            {["Innovative.", "Intuitive.", "Insightful"].map((list, index) => (
+            {["Innovative.", "Intuitive.", "Insightful"].map((list, i) => (
               <p
-                key={index}
+                key={i}
                 className="text-[#E6EBF0] border-8 border-[#C9E4FF] bg-[#1F7FDF] rounded-full px-2 first:ml-0 ml-[-12px] font-Ubuntu font-medium text-lg lsm:text-sm mb-2"
               >
                 {list}
