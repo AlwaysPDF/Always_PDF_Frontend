@@ -156,7 +156,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
           );
         })}
       </aside>
-      <aside className="w-[30%] border flex justify-end fixed bottom-0">
+      <aside className="w-[30%] llg:w-[90%] flex justify-end fixed bottom-0">
         <ChatInput handleSendMsg={handleSendMsg} />
       </aside>
     </main>

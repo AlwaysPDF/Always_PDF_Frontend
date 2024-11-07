@@ -44,32 +44,52 @@ const PriceList = () => {
   ];
   return (
     <section className="flex justify-center items-center w-full">
-      <div className="flex justify-center items-center w-[80%] llg:w-[90%] lmd:w-[95%] bg-gradient-price py-14 rounded-lg">
+      <div className="flex justify-center items-center flex-col w-[80%] llg:w-[90%] lmd:w-[95%] bg-gradient-price py-14 rounded-lg">
+        <aside className="relative  w-[13%] lmd:w-[60%] lsm:w-full flex justify-center items-center flex-col mb-2">
+          <h1 className="font-Ubuntu font-semibold text-basicBlue text-3xl lmd:text-2xl">
+            Pricing
+          </h1>
+          <span className="bg-[#FFC71F] h-[4px] w-full absolute z-[-3] bottom-[10px] "></span>
+        </aside>
+        <p className="mb-12 text-center">
+          Choose the plan that best fits your needs and unlock the full
+          potential of your PDFs with EverPDF. <br />
+          Note: All plans come with a 14-day free trial
+        </p>
         <main className="grid grid-cols-3 lmd:grid-cols-1 gap-0 border w-[90%] justify-center">
           {lists?.map((item, i) => (
             <div
-              className={`flex justify-center items-center ${i === 1 ? "box-content py-14" : "box-border"} ${item?.name === "Premium Plan" && "text-white"} ${item?.className}`}
+              className={`flex justify-center items-center rounded-xl ${i === 1 ? "box-content py-14" : "box-border"} ${item?.name === "Premium Plan" && "text-white"} ${item?.className}`}
               key={i}
             >
               <aside className="w-[90%]">
                 <div
                   className={`border-b py-2 ${item?.name !== "Premium Plan" ? "border-[#3EB489]" : "border-[#FFA90C]"}`}
                 >
-                  <h3 className="font-Ubuntu text-offblack font-medium mb-5">
+                  <h3
+                    className={`font-Ubuntu font-semibold mb-5 ${item.name === "Premium Plan" ? "text-[#FFD381]" : item.name === "Enterprise Plan" ? "text-[#0070E0]" : "text-offblack"}`}
+                  >
                     {item?.name}{" "}
                     <small className="text-[14px] font-Ubuntu">
                       {item?.name === "Free Plan" ? "(Forever FREE)" : ""}
                     </small>
                   </h3>
                   <h4
-                    className={`font-Ubuntu text-offblack text-xl font-medium ${item?.name !== "Enterprise Plan" ? "font-semibold" : "font-medium"}`}
+                    className={`font-Ubuntu text-xl font-semibold ${item.name === "Premium Plan" ? "text-white" : "text-offblack"} ${item?.name !== "Enterprise Plan" ? "font-semibold" : "font-medium"}`}
                   >
                     {item?.name !== "Enterprise Plan" && "$"}
-                    {item?.price}
+                    {item?.price}{" "}
+                    <small className="text-xs font-light">
+                      {item?.name === "Free Plan"
+                        ? "/month"
+                        : item?.name !== "Enterprise Plan"
+                          ? "/month or $99.99/year"
+                          : "(Contact for a quote)"}
+                    </small>
                   </h4>
                 </div>
                 <div className="mt-4">
-                  <h1>Features</h1>
+                  <h1 className="mb-4">Features</h1>
                   <div>
                     {item?.features?.map((feats, i) => (
                       <div

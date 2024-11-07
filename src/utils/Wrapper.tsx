@@ -23,7 +23,7 @@ const Wrapper: React.FC<WrapperProps> = ({ children }) => {
               >
                   <DashMainNav />
                 {children}
-              </div>
+              </div>  
             </div>
           </main>
         </section>

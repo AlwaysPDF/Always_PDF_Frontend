@@ -15,47 +15,47 @@ const DashMainNav = () => {
   const [isOnline, setIsOnline] = useState(false);
   const [lastOnlineStatus, setLastOnlineStatus] = useState(false);
 
-  // const updateOnlineStatus = () => {
-  //   if (typeof navigator !== "undefined") {
-  //     setLastOnlineStatus(navigator.onLine);
-  //     if (navigator.onLine) {
-  //       checkInternetConnection();
-  //     } else {
-  //       setIsOnline(false);
-  //     }
-  //   }
-  // };
+  const updateOnlineStatus = () => {
+    if (typeof navigator !== "undefined") {
+      setLastOnlineStatus(navigator.onLine);
+      if (navigator.onLine) {
+        checkInternetConnection();
+      } else {
+        setIsOnline(false);
+      }
+    }
+  };
 
-  // const checkInternetConnection = () => {
-  //   fetch("https://www.google.com", { method: "HEAD", mode: "no-cors" })
-  //     .then(() => {
-  //       setIsOnline(true);
-  //     })
-  //     .catch(() => {
-  //       setIsOnline(false);
-  //     });
-  // };
+  const checkInternetConnection = () => {
+    fetch("https://www.google.com", { method: "HEAD", mode: "no-cors" })
+      .then(() => {
+        setIsOnline(true);
+      })
+      .catch(() => {
+        setIsOnline(false);
+      });
+  };
 
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     window.addEventListener("online", updateOnlineStatus);
-  //     window.addEventListener("offline", updateOnlineStatus);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("online", updateOnlineStatus);
+      window.addEventListener("offline", updateOnlineStatus);
 
-  //     const interval = setInterval(checkInternetConnection, 1000); // Check every 5 seconds
+      const interval = setInterval(checkInternetConnection, 1000); // Check every 5 seconds
 
-  //     return () => {
-  //       window.removeEventListener("online", updateOnlineStatus);
-  //       window.removeEventListener("offline", updateOnlineStatus);
-  //       clearInterval(interval);
-  //     };
-  //   }
-  // }, []);
+      return () => {
+        window.removeEventListener("online", updateOnlineStatus);
+        window.removeEventListener("offline", updateOnlineStatus);
+        clearInterval(interval);
+      };
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   if (typeof navigator !== "undefined" && navigator.onLine && !isOnline) {
-  //     checkInternetConnection();
-  //   }
-  // }, [lastOnlineStatus, isOnline]);
+  useEffect(() => {
+    if (typeof navigator !== "undefined" && navigator.onLine && !isOnline) {
+      checkInternetConnection();
+    }
+  }, [lastOnlineStatus, isOnline]);
 
   const handleLogOut = () => {
     // Remove the user token
@@ -74,6 +74,7 @@ const DashMainNav = () => {
       <div className="lg:pl-[220px] flex justify-center items-center  w-full h-full lg:w-[95%] z-[9999999] bg-white">
         <div className="w-[95vw] llg:w-[95%] h-full flex justify-center items-center border-b border-borderGrey py-4">
           <main className="flex justify-between items-center py- w-full">
+            {/* close and open button */}
             <aside className="hidden justify-start items-center flex-col llg:flex">
               <button
                 className="md:hidden cursor-pointer "
@@ -86,6 +87,7 @@ const DashMainNav = () => {
                 )}
               </button>
             </aside>
+            {/* close and open button */}
             <aside className="flex justify-start items-center flex-col llg:hidden">
               <div>
                 <Image src="" alt="" />

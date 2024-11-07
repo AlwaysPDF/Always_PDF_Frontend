@@ -1,23 +1,23 @@
 "use client";
 
-import { axiosInstanceWithHeader } from "@/utils/AxiosHeader";
+// import { axiosInstanceWithHeader } from "@/utils/AxiosHeader";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useAppContext } from "../ContextApi/ContextApi";
 import { BounceLoader } from "react-spinners";
 import ChatContainer from "./ChatContainer";
 import { io, Socket } from "socket.io-client";
 
-import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
-import "@cyntler/react-doc-viewer/dist/index.css";
+// import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
+// import "@cyntler/react-doc-viewer/dist/index.css";
 // import logger from 'logging-library';
-// import FileViewer from "react-file-viewer";
-// import { CustomErrorComponent } from 'custom-error';
+import FileViewer from "react-file-viewer";
+// import { CustomErrorComponent } from "custom-error";
+
 interface Token {
   token?: string;
 }
 
 type Chat = {
-  // Define the structure of the chat if needed
   [key: string]: any;
 };
 
@@ -43,24 +43,24 @@ const AllConversations: React.FC<Token> = ({ token }) => {
 
   // const socket = useRef<Socket | null>(null);
   // const socket = io();
-  const docs = [
-    {
-      uri:
-        pdfUrl ||
-        "https://firebasestorage.googleapis.com/v0/b/alwayspdf-8bb50.appspot.com/o/documents%2FMantra_MFS100_RD_Service_Manual_Windows_1.1.0.pdf-6986523105?alt=media&token=f9373df9-b9de-4ad1-82fa-544c21489899",
-      fileType: "docx",
-      fileName: "Sample demo.docx",
-    }, // Remote file
-  ];
+  // const docs = [
+  //   {
+  //     uri:
+  //       pdfUrl ||
+  //       "https://firebasestorage.googleapis.com/v0/b/alwayspdf-8bb50.appspot.com/o/documents%2FMantra_MFS100_RD_Service_Manual_Windows_1.1.0.pdf-6986523105?alt=media&token=f9373df9-b9de-4ad1-82fa-544c21489899",
+  //     fileType: "docx",
+  //     fileName: "Document.docx",
+  //   }, // Remote file
+  // ];
 
-  // const file =
-  //   "https://docs.google.com/document/d/1hn_GhOoblmo4gShta01eb-3T2bqwC18qI2trQRym7dg";
-  // const type = "docx";
+  const file =
+    "https://docs.google.com/document/d/1hn_GhOoblmo4gShta01eb-3T2bqwC18qI2trQRym7dg";
+  const type = "docx";
 
-  // const onError = (error: Error) => {
-  //   console.error("Error in file viewer:", error);
-  //   // You can add more error handling logic here, such as displaying an error message to the user
-  // };
+  const onError = (error: Error) => {
+    console.error("Error in file viewer:", error);
+    // You can add more error handling logic here, such as displaying an error message to the user
+  };
 
   const socketRef = useRef<SocketRef>({ socket: null, id: undefined });
   const [connectionStatus, setConnectionStatus] =
@@ -231,44 +231,26 @@ const AllConversations: React.FC<Token> = ({ token }) => {
     };
   }, [setupSocket]);
 
-  // useEffect(()=>{
-  //   socket.on("connect", () => {
-  //     console.log("Socket connected:", socketRef.current.id);
-  //     socket?.emit("add-user", currentUser.userId);
-  //   });
-
-  //   socket.on("connect_error", (err) => {
-  //     console.error("Connection error:", err);
-  //   });
-
-  //   socket.on("reconnect_attempt", (attempt) => {
-  //     console.log(`Reconnection attempt #${attempt}`);
-  //   });
-
-  //   socket.on("disconnect", () => {
-  //     console.log("Socket disconnected");
-  //   });
-  // },[])
-
   return (
-    <section className="flex justify-center items-center w-full h-screen bg-white overflow-hidden">
-      <div className="mb-4">Connection Status: {connectionStatus}</div>
+    <section className="flex justify-center items-center w-full h-screen bg-white overflow-x-hidden">
+      {/* <div className="mb-4">Connection Status: {connectionStatus}</div> */}
       {loadingActive ? (
         <BounceLoader color="#25076B" size={120} />
       ) : (
-        <div className="flex gap-16 w-full">
+        <div className="grid grid-cols-2 llg:grid-cols-1 gap-16 llg:gap-6 w-full">
           <aside className="w-full bg-white rounded-xl flex justify-center items-center">
-            <DocViewer
+            {/* <DocViewer
               documents={docs}
               pluginRenderers={DocViewerRenderers}
               style={{ height: 500, width: "100%" }}
-            />
+            /> */}
             {/* <div className="w-full">{pdfText}</div> */}
 
             {/* <FileViewer
               fileType={type}
               filePath={file}
-              errorComponent={CustomErrorComponent}
+              errorComponent={<CustomErrorComponent />}
+              // errorComponent={CustomErrorComponent}
               onError={onError}
             /> */}
           </aside>
@@ -286,9 +268,9 @@ const AllConversations: React.FC<Token> = ({ token }) => {
 
 export default AllConversations;
 
-// const CustomErrorComponent= (): JSX.Element => (
-//   <div>
-//     <p>An error occurred while viewing the file.</p>
-//     <button>Retry</button>
-//   </div>
-// );
+const CustomErrorComponent = (): JSX.Element => (
+  <div>
+    <p>An error occurred while viewing the file.</p>
+    <button className='px-6 py-2 bg-deepblue rounded-md' onClick={() => window.location.reload()}>Retry</button>
+  </div>
+);
