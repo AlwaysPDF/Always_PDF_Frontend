@@ -171,7 +171,7 @@ const AllConversations: React.FC<Token> = ({ token }) => {
       {loadingActive ? (
         <BounceLoader color="#25076B" size={120} />
       ) : (
-        <div className="grid grid-cols-2 llg:grid-cols-1 gap-16 llg:gap-6 w-full">
+        <div className="grid grid-cols-2 llg:grid-cols-1 gap-12 llg:gap-6 w-full">
           <aside className="w-full bg-white rounded-xl flex justify-center items-center">
             {/* <DocViewer
               documents={docs}

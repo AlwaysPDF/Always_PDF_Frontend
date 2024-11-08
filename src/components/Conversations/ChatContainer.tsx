@@ -4,6 +4,7 @@ import { Socket } from "socket.io-client";
 import { axiosInstanceWithHeader } from "@/utils/AxiosHeader";
 import { useAppContext } from "../ContextApi/ContextApi";
 import { PulseLoader } from "react-spinners";
+import { marked } from "marked";
 
 import halfLogo from "../../../public/assets/halfLogo.png";
 import ChatInput from "./ChatInput";
@@ -123,6 +124,42 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const formatResponseWithMarkdown = (response) => {
+    // Convert markdown to HTML
+    const htmlContent = marked(response);
+    return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+  };
+
+  // const formatResponse = (response) => {
+  //   // Handle line breaks and code blocks in the response
+  //   return response.split('\n').map((line, index) => {
+  //     if (line.startsWith("```") && line.endsWith("```")) {
+  //       // Handle inline code
+  //       return (
+  //         <pre key={index} style={{ background: "#f5f5f5", padding: "10px" }}>
+  //           <code>{line.replace(/```/g, '')}</code>
+  //         </pre>
+  //       );
+  //     } else if (line.startsWith("```")) {
+  //       // Start of a code block
+  //       return (
+  //         <pre key={index} style={{ background: "#f5f5f5", padding: "10px" }}>
+  //           <code>{line.replace("```", "")}</code>
+  //         </pre>
+  //       );
+  //     } else if (line.endsWith("```")) {
+  //       // End of a code block
+  //       return (
+  //         <pre key={index} style={{ background: "#f5f5f5", padding: "10px" }}>
+  //           <code>{line.replace("```", "")}</code>
+  //         </pre>
+  //       );
+  //     }
+  //     return <p key={index}>{line}</p>;
+  //   });
+  // };
+  
+
   // Your component logic here
   return (
     <main className="w-full flex justify-center items-center flex-col">
@@ -148,7 +185,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
                     </div>
                   )}
                   <div className="w-full font-Ubuntu text-offblack">
-                    {message.message}
+                    {message.message && formatResponseWithMarkdown(message.message)}
                   </div>
                 </div>
               </div>
