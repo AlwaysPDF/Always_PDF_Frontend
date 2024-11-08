@@ -15,7 +15,7 @@ const FilledDocument = () => {
   const router = useRouter();
   const { setIsModalOpen, documents, setPdfUrl } = useAppContext();
 
-  const [searchContact, setSearchContact] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   // search docs
   // search docs
 
@@ -48,6 +48,12 @@ const FilledDocument = () => {
     }
   };
 
+  const filteredDocuments = Array.isArray(documents)
+    ? documents.filter((document) =>
+        document.fileName.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
+
   return (
     <section className="flex justify-center items-center w-full">
       <div className="grid grid-cols-2 llg:grid-cols-1 gap-20 llg:gap-6 w-full llg:flex lg:flex-col-reverse llg:flex-col-reverse">
@@ -61,14 +67,15 @@ const FilledDocument = () => {
                 <input
                   type="text"
                   placeholder="Search documents"
-                  onChange={(e) => setSearchContact(e.target.value)}
-                  className="w-full py-2 px-2 focus:outline-none border border-[#DEDEDE] rounded-md text-grey text-sm mt-2"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full py-2 px-2 focus:outline-none border border-[#DEDEDE] rounded-md text-basicBlue font-medium text-sm mt-2"
                 />
               </div>
             </div>
             <main className="w-full mt-8 overflow-y-scroll h-[60vh] filled-document">
               <div className="grid grid-cols-1 gap-4 w-full">
-                {documents?.map((doc, i) => (
+                {filteredDocuments?.map((doc, i) => (
                   <SingleDocument
                     doc={doc}
                     key={i}

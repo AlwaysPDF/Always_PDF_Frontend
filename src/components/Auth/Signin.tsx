@@ -47,7 +47,6 @@ const Signin = () => {
 
     const newUserDetails = { ...userDetails, [name]: value };
     setUserDetails(newUserDetails); // Update userDetails state
-    console.log(newUserDetails);
 
     if (setIsActive) {
         const { email = "", password = "" } = newUserDetails;
@@ -71,7 +70,6 @@ const Signin = () => {
       } else {
         setIsActive(false);
       }
-      console.log(isActive);
     }
   };
 
@@ -88,13 +86,8 @@ const Signin = () => {
             console.error(`Error: Empty field - ${field}`);
             errors[field] = `${
               field === "email" ? "Email address" : "password"
-              // field.charAt(0).toUpperCase() + field.slice(1)
             } is required.`;
-            // if (validateEmail) {
-            //   if (userDetails.email && !validateEmail(userDetails.email)) {
-            //     errors.email = "Invalid email address";
-            //   }
-            // }
+            
           } else {
             delete errors[field];
           }
@@ -118,43 +111,29 @@ const Signin = () => {
               secure: true,
             });
             window.location.href = "/dashboard/my-documents";
-            if (setToastMessage) {
-              setToastMessage({
+              setToastMessage?.({
                 text: response?.data?.msg || "Login successfuly",
                 type: "success",
               });
-            }
-            if (setShowToast) {
-              setShowToast(true);
-            }
+              setShowToast?.(true);
             // Redirect to home page
           } else {
-            if (setToastMessage) {
-              setToastMessage({
+            setToastMessage?.({
                 text: response?.data?.msg || "Incorrect credentials",
                 type: "error",
               });
             }
-          }
         })
         .catch((err) => {
-          if (setToastMessage) {
-            setToastMessage({
+            setToastMessage?.({
               text: err?.response?.data?.msg || "Incorrect credentials",
               type: "error",
             });
-          }
-          if (setShowToast) {
-            setShowToast(true);
-          }
+            setShowToast?.(true);
         })
         .finally(() => {
-          if (setUserDetails) {
-            setUserDetails({ email: "", password: "" });
-          }
-          if (setLoadingActive) {
-            setLoadingActive(false);
-          }
+            setUserDetails?.({ email: "", password: "" });
+            setLoadingActive?.(false);
         });
     }
   };

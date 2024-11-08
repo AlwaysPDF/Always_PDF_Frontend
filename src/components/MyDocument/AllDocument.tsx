@@ -10,12 +10,6 @@ import { useAppContext } from "../ContextApi/ContextApi";
 const AllDocument = () => {
   const { isModalOpen, setIsModalOpen, documents } = useAppContext();
 
-  // const showModal = () => {
-  //   if (setIsModalOpen) {
-  //     setIsModalOpen(true);
-  //   }
-  // };
-
   const handleCancel = () => {
     if (setIsModalOpen) {
       setIsModalOpen(false);

@@ -41,7 +41,7 @@ const DashMainNav = () => {
       window.addEventListener("online", updateOnlineStatus);
       window.addEventListener("offline", updateOnlineStatus);
 
-      const interval = setInterval(checkInternetConnection, 1000); // Check every 5 seconds
+      const interval = setInterval(checkInternetConnection, 10000); // Check every 5 seconds
 
       return () => {
         window.removeEventListener("online", updateOnlineStatus);

@@ -1,16 +1,12 @@
+import Image from "next/image";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { Socket } from "socket.io-client";
-import ChatInput from "./ChatInput";
 import { axiosInstanceWithHeader } from "@/utils/AxiosHeader";
 import { useAppContext } from "../ContextApi/ContextApi";
+import { PulseLoader } from "react-spinners";
 
 import halfLogo from "../../../public/assets/halfLogo.png";
-import Image from "next/image";
-
-type Chat = {
-  // Define the structure of the chat if needed
-  [key: string]: any;
-};
+import ChatInput from "./ChatInput";
 
 interface SocketRef {
   socket: Socket | null;
@@ -18,7 +14,6 @@ interface SocketRef {
 }
 
 interface ChatContainerProps {
-  // currentChat: Chat | null;
   token?: string;
   socketRef: MutableRefObject<SocketRef>;
 }
@@ -35,12 +30,12 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
 }) => {
   const { currentUser, setLoadingActive, pdfText } = useAppContext();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
   // const socketRef = useRef<SocketRef>({ socket: null, id: null });
   const [arrivalMessage, setArrivalMessage] = useState<ChatMessage | null>(
     null
   );
-  const [currentChat, setCurrentChat] = useState(undefined);
 
   useEffect(() => {
     // Load initial chat history (optional)
@@ -55,69 +50,74 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       }
     };
     fetchMessage();
-    // .then(res => res.json())
-    // .then(data => setMessages(data));
 
-    // Listen for incoming messages
-    // Listen for incoming messages
+    // Set up socket message handler
+    const handleReceiveMessage = (msg: string) => {
+      setMessages((prev) => [...prev, { fromSelf: false, message: msg }]);
+      setIsLoading(false);
+    };
+
     if (socketRef.current?.socket) {
       socketRef.current.socket.on("msg-recieve", (message) => {
-        setMessages((prevMessages) => [...prevMessages, message]);
+        // setMessages((prevMessages) => [...prevMessages, message]);
+        // setIsLoading(false);
       });
     }
 
     // Cleanup on component unmount
     return () => {
-      socketRef.current.socket?.off("message");
+      if (socketRef.current?.socket) {
+        socketRef.current.socket.off("msg-recieve", handleReceiveMessage);
+      }
     };
-  }, []);
+  }, [token, socketRef]);
 
   const handleSendMsg = async (question: string) => {
     // if (!socket.current) return;
-    if (!socketRef?.current?.socket) return;
-    if (!question.trim()) return;
+    if (!socketRef?.current?.socket || !question.trim()) return;
+
+    const newMessage = { fromSelf: true, message: question };
+    setMessages((prev) => [...prev, newMessage]);
+    setIsLoading(true); // Start loading state
 
     socketRef.current.socket.emit("send-msg", {
-      // to: currentChat._id,
       from: currentUser?.userId,
-      pdfText: "My name is Ajibola, I am a boy, talk to me to fix this",
+      pdfText,
       documentId: token,
       question,
     });
     try {
       // setLoadingActive?.(true);
-      await axiosInstanceWithHeader.post("/messages/addMessage", {
-        // from: data._id,
-        // to: currentChat._id,
-        pdfText: "My name is Ajibola, I am a boy, talk to me to fix this",
+      const res = await axiosInstanceWithHeader.post("/messages/addMessage", {
+        pdfText,
         documentId: token,
         question,
-      });
-
-      const msgs = [...messages];
-      msgs.push({ fromSelf: true, message: question });
-      setMessages(msgs);
+      })
+      if (res.data.success) {
+        setMessages((prev) => [...prev, { fromSelf: false, message: res.data.aiMessage.message }])
+      }
     } catch (error) {
       console.error("Error sending message:", error);
     } finally {
-      // setLoadingActive?.(false);
+      setIsLoading(false);
     }
   };
 
-  useEffect(() => {
-    if (socketRef.current.socket) {
-      socketRef.current.socket.on("msg-recieve", (msg) => {
-        setArrivalMessage({ fromSelf: false, message: msg });
-        console.log(msg)
-      });
-    }
-  }, [socketRef.current.socket]);
+  // useEffect(() => {
+  //   if (socketRef.current.socket) {
+  //     socketRef.current.socket.on("msg-recieve", (msg) => {
+  //       setArrivalMessage({ fromSelf: false, message: msg });
+  //       setIsLoading(false);
+  //       console.log(msg);
+  //     });
+  //   }
+  // }, [socketRef.current.socket]);
 
-  useEffect(() => {
-    arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
-  }, [arrivalMessage]);
+  // useEffect(() => {
+  //   arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+  // }, [arrivalMessage]);
 
-  console.log(arrivalMessage)
+  console.log(arrivalMessage);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -147,14 +147,37 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
                       />
                     </div>
                   )}
-                  <p className="w-full font-Ubuntu text-offblack">
+                  <div className="w-full font-Ubuntu text-offblack">
                     {message.message}
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>
           );
         })}
+        {isLoading && (
+          <div
+            className={`flex items-center p-2 text-lg rounded-md justify-center max-w-[85%] w-[85%]`}
+          >
+            <div
+              className={`flex justify-center items-center bg-basicBlue size-[40px] rounded-full mr-2`}
+            >
+              <Image
+                src={halfLogo}
+                alt="White version of company logo"
+                className="size-[70%]"
+              />
+            </div>
+            <p className="w-full font-Ubuntu text-offblack">
+              <PulseLoader
+                color="#003366"
+                margin={5}
+                size={10}
+                speedMultiplier={1}
+              />
+            </p>
+          </div>
+        )}
       </aside>
       <aside className="w-[30%] llg:w-[90%] flex justify-end fixed bottom-0">
         <ChatInput handleSendMsg={handleSendMsg} />

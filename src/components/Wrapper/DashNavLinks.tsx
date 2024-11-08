@@ -21,6 +21,10 @@ const DashNavLinks = () => {
     },
   ];
 
+   // Check if the path contains either "my-documents" or "conversations"
+   const isMyDocumentsActive = location.pathname.includes('/dashboard/my-documents') || 
+   location.pathname.includes('/dashboard/conversations');
+
   return (
     <>
       <section className="flex justify-center items-center w-full">
@@ -30,7 +34,7 @@ const DashNavLinks = () => {
               <span
                 onClick={() => router.push(`${item?.link}`)}
                 key={i}
-                className={`flex justify-center items-center w-full mb-6 cursor-pointer ${
+                className={`flex justify-center items-center w-full mb-6 cursor-pointer ${(isMyDocumentsActive && item.link === '/dashboard/my-documents') ||
                   pathname === item?.link
                     ? "text-white bg-basicBlue rounded-md  py-2"
                     : "bg-white text-closedark"

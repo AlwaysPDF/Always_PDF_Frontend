@@ -11,6 +11,7 @@ import { io, Socket } from "socket.io-client";
 // import "@cyntler/react-doc-viewer/dist/index.css";
 // import logger from 'logging-library';
 import FileViewer from "react-file-viewer";
+import { axiosInstanceWithHeader } from "@/utils/AxiosHeader";
 // import { CustomErrorComponent } from "custom-error";
 
 interface Token {
@@ -68,111 +69,44 @@ const AllConversations: React.FC<Token> = ({ token }) => {
   // const [socket, setSocket] = useState<Socket | null>(null);
   // const [currentChat, setCurrentChat] = useState<Chat | null>(null);
 
-  // useEffect(() => {
-  //   const getPdfText = async () => {
-  //     if (token) {
-  //       if (setLoadingActive) {
-  //         setLoadingActive(true);
-  //       }
+  useEffect(() => {
+    const getPdfText = async () => {
+      if (token) {
+          setLoadingActive?.(true);
 
-  //       axiosInstanceWithHeader
-  //         .post(`/questions/upload/${token}`, { pdfUrl })
-  //         .then((response) => {
-  //           if (response?.data?.success === true) {
-  //             console.log(response?.data?.pdfText);
-  //             setPdfText?.(response?.data?.pdfText);
-  //             if (setToastMessage) {
-  //               setToastMessage({
-  //                 text:
-  //                   response?.data?.msg ||
-  //                   "A confirmation code has been sent to your email address.",
-  //                 type: "success",
-  //               });
-  //             }
-  //             if (setShowToast) {
-  //               setShowToast(true);
-  //             }
-  //             // Redirect to home page
-  //             //   window.location.href = "/auth/signin";
-  //           }
-  //         })
-  //         .catch((err) => {
-  //           if (setToastMessage) {
-  //             setToastMessage({
-  //               text:
-  //                 err?.response?.data?.errors?.[0]?.message ||
-  //                 "We are unable to find a user for this token. Token may have expired",
-  //               type: "error",
-  //             });
-  //           }
-  //           if (setShowToast) {
-  //             setShowToast(true);
-  //           }
-  //           // window.location.href = "/verify-email";
-  //         })
-  //         .finally(() => {
-  //           if (setLoadingActive) {
-  //             setLoadingActive(false);
-  //           }
-  //         });
-  //     }
-  //   };
+        axiosInstanceWithHeader
+          .post(`/questions/upload/${token}`, { pdfUrl })
+          .then((response) => {
+            if (response?.data?.success === true) {
+              setPdfText?.(response?.data?.pdfText);
+                // setToastMessage?.({
+                //   text:
+                //     response?.data?.msg ||
+                //     "A confirmation code has been sent to your email address.",
+                //   type: "success",
+                // });
+                // setShowToast?.(true);
+              // }
+              // Redirect to home page
+              //   window.location.href = "/auth/signin";
+            }
+          }).catch((err: any) => {
+              setToastMessage?.({
+                text:
+                  err?.response?.data?.errors?.[0]?.message ||
+                  "We are unable to find a user for this token. Token may have expired",
+                type: "error",
+              });
+              setShowToast?.(true);
+          })
+          .finally(() => {
+              setLoadingActive?.(false);
+          });
+      }
+    };
 
-  //   getPdfText();
-  // }, [token]);
-
-  // useEffect(() => {
-  //   console.log(currentUser);
-  //   if (currentUser) {
-  //     // socket = io("http://localhost:5000");
-  //     if (!socketRef.current.socket) {
-  //       const socketUrl = process.env.NODE_ENV === "development"
-  //         ? "http://localhost:5000"
-  //         : "https://alwayspdf-backend.onrender.com";
-
-  //       console.log("Attempting to connect to:", socketUrl);
-
-  //       socketRef.current.socket = io(socketUrl, {
-  //         transports: ['websocket'],
-  //         upgrade: false,
-  //         reconnection: true,
-  //         reconnectionAttempts: 5,
-  //         reconnectionDelay: 1000,
-  //       });
-  //       // console.log(socketRef.current);
-
-  //       // Define the loggingFunction
-  //       const handleConnect = (): void => {
-  //         console.log("Socket connected:", socketRef.current.socket?.id);
-  //         socketRef.current.socket?.emit("add-user", currentUser.userId);
-  //         console.log("User added to socket:", currentUser.userId);
-  //         setConnectionStatus("Connected");
-  //       };
-
-  //       const handleConnectError = (error: Error): void => {
-  //         console.error("Connection error:", error);
-  //         setConnectionStatus(`Error: ${error.message}`);
-  //       };
-
-  //       const handleDisconnect = (reason: string): void => {
-  //         console.log("Disconnected:", reason);
-  //         setConnectionStatus(`Disconnected: ${reason}`);
-  //       };
-
-  //       socketRef.current.socket.on("connect", handleConnect);
-  //       socketRef.current.socket.on("connect_error", handleConnectError);
-  //       socketRef.current.socket.on("disconnect", handleDisconnect);
-
-  //       return () => {
-  //         console.log("Cleaning up socket connection");
-  //         socketRef.current.socket?.off("connect", handleConnect);
-  //         socketRef.current.socket?.off("connect_error", handleConnectError);
-  //         socketRef.current.socket?.off("disconnect", handleDisconnect);
-  //         socketRef.current.socket?.disconnect();
-  //       };
-  //     }
-  //   }
-  // }, [currentUser]);
+    getPdfText();
+  }, [token]);
 
   console.log(socketRef.current.socket);
 

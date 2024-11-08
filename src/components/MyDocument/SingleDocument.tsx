@@ -16,7 +16,6 @@ const SingleDocument: React.FC<any> = ({
   return (
     <div
       className="flex justify-between items-center border-b border-[#DEDEDE] py-4"
-      // onClick={() => setIsModalOpen && setIsModalOpen(true)}
     >
       <aside className="w-[10%] max-w-[60px] h-full">
         <Image
@@ -56,7 +55,6 @@ const SingleDocument: React.FC<any> = ({
         </button>
         <div onClick={() => handleDelete(doc?._id)}>
           <i className="fa-regular fa-trash-can text-[#7A7A7A] text-lg ml-2 cursor-pointer"></i>
-          {/* <RiDeleteBin5Line className="text-[#7A7A7A] text-2xl" /> */}
         </div>
       </aside>
       {/* <img
