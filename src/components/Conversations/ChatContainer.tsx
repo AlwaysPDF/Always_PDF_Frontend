@@ -172,16 +172,16 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
                 className={`flex items-center max-w-full ${message.fromSelf ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`flex items-start p-2 text-lg rounded-md ${message.fromSelf ? "justify-end border border-[#DEDEDE] max-w-[85%] w-[85%]" : "justify-start max-w-[85%] w-[85%]"}`}
+                  className={`flex items-start p-2 text-lg rounded-md ${message.fromSelf ? "justify-end border border-[#DEDEDE] max-w-[95%] w-[95%]" : "justify-start max-w-[95%] w-[95%]"}`}
                 >
                   {!message?.fromSelf && (
                     <div
-                      className={`flex justify-center items-center ${!message?.fromSelf && "bg-basicBlue size-[40px] rounded-full mr-2"}`}
+                      className={`flex justify-center items-center ${!message?.fromSelf && "bg-basicBlue size-[30px] rounded-full mr-2"}`}
                     >
                       <Image
                         src={halfLogo}
                         alt="White version of company logo"
-                        className="size-[70%]"
+                        className="size-[60%]"
                       />
                     </div>
                   )}
@@ -198,19 +198,19 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
             className={`flex items-center p-2 text-lg rounded-md justify-center max-w-[85%] w-[85%]`}
           >
             <div
-              className={`flex justify-center items-center bg-basicBlue size-[40px] rounded-full mr-2`}
+              className={`flex justify-center items-center bg-basicBlue size-[30px] rounded-full mr-2`}
             >
               <Image
                 src={halfLogo}
                 alt="White version of company logo"
-                className="size-[70%]"
+                className="size-[60%]"
               />
             </div>
             <p className="w-full font-Ubuntu text-offblack">
               <PulseLoader
                 color="#003366"
                 margin={5}
-                size={10}
+                size={6}
                 speedMultiplier={1}
               />
             </p>

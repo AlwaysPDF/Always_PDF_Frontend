@@ -46,8 +46,8 @@ const DashBigSideNav = () => {
           >
             <Image
               src={coloredLogo}
-              alt="Quiztify Logo"
-              className="w-[62%] h-full object-cover"
+              alt="Always PDF Logo"
+              className="w-[62%] h-full object-cover cursor-pointer"
             />
             <div className="bg-[#E2FFDB] text-[#00B800] px-3 py-1 rounded-lg ml-2">
               <p>{tier}</p>
