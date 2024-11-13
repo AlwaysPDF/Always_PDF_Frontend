@@ -6,7 +6,7 @@ export const axiosInstance = axios.create({
   baseURL: `${
     process.env.NODE_ENV === "development"
       ? "http://localhost:5000"
-      : "https://alwayspdf-backend.onrender.com"
+      : "https://always-pdf-backend.vercel.app"
   }/api/v1`, // Set your API base URL
   headers: {
     "Content-Type": "application/json", // Specify the content type header
@@ -19,7 +19,7 @@ export const axiosInstanceWithHeader = axios.create({
   baseURL: `${
     process.env.NODE_ENV === "development"
       ? "http://localhost:5000"
-      : "https://alwayspdf-backend.onrender.com"
+      : "https://always-pdf-backend.vercel.app"
   }/api/v1`, // Set your API base URL
   headers: {
     // Perform localStorage action
