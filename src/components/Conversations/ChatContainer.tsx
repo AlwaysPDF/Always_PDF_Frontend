@@ -9,14 +9,14 @@ import { marked } from "marked";
 import halfLogo from "../../../public/assets/halfLogo.png";
 import ChatInput from "./ChatInput";
 
-interface SocketRef {
-  socket: Socket | null;
-  id: string | undefined;
-}
+// interface SocketRef {
+//   socket: Socket | null;
+//   id: string | undefined;
+// }
 
 interface ChatContainerProps {
   token?: string;
-  socketRef: MutableRefObject<SocketRef>;
+  // socketRef: MutableRefObject<SocketRef>;
 }
 
 type ChatMessage = {
@@ -27,7 +27,7 @@ type ChatMessage = {
 const ChatContainer: React.FC<ChatContainerProps> = ({
   // currentChat,
   token,
-  socketRef,
+  // socketRef,
 }) => {
   const { currentUser, setLoadingActive, pdfText } = useAppContext();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -53,40 +53,41 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     fetchMessage();
 
     // Set up socket message handler
-    const handleReceiveMessage = (msg: string) => {
-      setMessages((prev) => [...prev, { fromSelf: false, message: msg }]);
-      setIsLoading(false);
-    };
+    // const handleReceiveMessage = (msg: string) => {
+    //   setMessages((prev) => [...prev, { fromSelf: false, message: msg }]);
+    //   setIsLoading(false);
+    // };
 
-    if (socketRef.current?.socket) {
-      socketRef.current.socket.on("msg-recieve", (message) => {
-        // setMessages((prevMessages) => [...prevMessages, message]);
-        // setIsLoading(false);
-      });
-    }
+    // if (socketRef.current?.socket) {
+    //   socketRef.current.socket.on("msg-recieve", (message) => {
+    //     // setMessages((prevMessages) => [...prevMessages, message]);
+    //     // setIsLoading(false);
+    //   });
+    // }
 
     // Cleanup on component unmount
-    return () => {
-      if (socketRef.current?.socket) {
-        socketRef.current.socket.off("msg-recieve", handleReceiveMessage);
-      }
-    };
-  }, [token, socketRef]);
+    // return () => {
+    //   if (socketRef.current?.socket) {
+    //     socketRef.current.socket.off("msg-recieve", handleReceiveMessage);
+    //   }
+    // };
+  }, [token]);
 
   const handleSendMsg = async (question: string) => {
     // if (!socket.current) return;
-    if (!socketRef?.current?.socket || !question.trim()) return;
+    // if (!socketRef?.current?.socket || !question.trim()) return;
+    if (!question.trim()) return;
 
     const newMessage = { fromSelf: true, message: question };
     setMessages((prev) => [...prev, newMessage]);
     setIsLoading(true); // Start loading state
 
-    socketRef.current.socket.emit("send-msg", {
-      from: currentUser?.userId,
-      pdfText,
-      documentId: token,
-      question,
-    });
+    // socketRef.current.socket.emit("send-msg", {
+    //   from: currentUser?.userId,
+    //   pdfText,
+    //   documentId: token,
+    //   question,
+    // });
     try {
       // setLoadingActive?.(true);
       const res = await axiosInstanceWithHeader.post("/messages/addMessage", {
@@ -124,7 +125,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const formatResponseWithMarkdown = (response) => {
+  const formatResponseWithMarkdown = (response: string) => {
     // Convert markdown to HTML
     const htmlContent = marked(response);
     return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;

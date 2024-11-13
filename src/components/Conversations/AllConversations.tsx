@@ -1,11 +1,12 @@
 "use client";
 
 // import { axiosInstanceWithHeader } from "@/utils/AxiosHeader";
-import { useEffect, useRef, useState, useCallback } from "react";
+// useRef, useState, useCallback 
+import { useEffect, } from "react";
 import { useAppContext } from "../ContextApi/ContextApi";
 import { BounceLoader } from "react-spinners";
 import ChatContainer from "./ChatContainer";
-import { io, Socket } from "socket.io-client";
+// import { io, Socket } from "socket.io-client";
 
 // import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 // import "@cyntler/react-doc-viewer/dist/index.css";
@@ -18,14 +19,14 @@ interface Token {
   token?: string;
 }
 
-type Chat = {
-  [key: string]: any;
-};
+// type Chat = {
+//   [key: string]: any;
+// };
 
-interface SocketRef {
-  socket: Socket | null;
-  id: string | undefined;
-}
+// interface SocketRef {
+//   socket: Socket | null;
+//   id: string | undefined;
+// }
 
 const AllConversations: React.FC<Token> = ({ token }) => {
   const {
@@ -63,9 +64,9 @@ const AllConversations: React.FC<Token> = ({ token }) => {
     // You can add more error handling logic here, such as displaying an error message to the user
   };
 
-  const socketRef = useRef<SocketRef>({ socket: null, id: undefined });
-  const [connectionStatus, setConnectionStatus] =
-    useState<string>("Disconnected");
+  // const socketRef = useRef<SocketRef>({ socket: null, id: undefined });
+  // const [connectionStatus, setConnectionStatus] =
+  //   useState<string>("Disconnected");
   // const [socket, setSocket] = useState<Socket | null>(null);
   // const [currentChat, setCurrentChat] = useState<Chat | null>(null);
 
@@ -79,16 +80,7 @@ const AllConversations: React.FC<Token> = ({ token }) => {
           .then((response) => {
             if (response?.data?.success === true) {
               setPdfText?.(response?.data?.pdfText);
-                // setToastMessage?.({
-                //   text:
-                //     response?.data?.msg ||
-                //     "A confirmation code has been sent to your email address.",
-                //   type: "success",
-                // });
-                // setShowToast?.(true);
-              // }
-              // Redirect to home page
-              //   window.location.href = "/auth/signin";
+                
             }
           }).catch((err: any) => {
               setToastMessage?.({
@@ -108,62 +100,62 @@ const AllConversations: React.FC<Token> = ({ token }) => {
     getPdfText();
   }, [token]);
 
-  console.log(socketRef.current.socket);
+  // console.log(socketRef.current.socket);
 
-  const setupSocket = useCallback(() => {
-    if (currentUser && !socketRef.current.socket) {
-      const socketUrl =
-        process.env.NODE_ENV === "development"
-          ? "http://localhost:5000"
-          : "https://alwayspdf-backend.onrender.com";
+  // const setupSocket = useCallback(() => {
+  //   if (currentUser && !socketRef.current.socket) {
+  //     const socketUrl =
+  //       process.env.NODE_ENV === "development"
+  //         ? "http://localhost:5000"
+  //         : "https://alwayspdf-backend.onrender.com";
 
-      console.log("Attempting to connect to:", socketUrl);
+  //     console.log("Attempting to connect to:", socketUrl);
 
-      socketRef.current.socket = io(socketUrl, {
-        transports: ["websocket"],
-        upgrade: false,
-        reconnection: true,
-        reconnectionAttempts: 5,
-        reconnectionDelay: 1000,
-      });
+  //     socketRef.current.socket = io(socketUrl, {
+  //       transports: ["websocket"],
+  //       upgrade: false,
+  //       reconnection: true,
+  //       reconnectionAttempts: 5,
+  //       reconnectionDelay: 1000,
+  //     });
 
-      const handleConnect = (): void => {
-        console.log("Socket connected:", socketRef.current.socket?.id);
-        socketRef.current.socket?.emit("add-user", currentUser.userId);
-        console.log("User added to socket:", currentUser.userId);
-        setConnectionStatus("Connected");
-      };
+  //     const handleConnect = (): void => {
+  //       console.log("Socket connected:", socketRef.current.socket?.id);
+  //       socketRef.current.socket?.emit("add-user", currentUser.userId);
+  //       console.log("User added to socket:", currentUser.userId);
+  //       setConnectionStatus("Connected");
+  //     };
 
-      const handleConnectError = (error: Error): void => {
-        console.error("Connection error:", error);
-        setConnectionStatus(`Error: ${error.message}`);
-      };
+  //     const handleConnectError = (error: Error): void => {
+  //       console.error("Connection error:", error);
+  //       setConnectionStatus(`Error: ${error.message}`);
+  //     };
 
-      const handleDisconnect = (reason: string): void => {
-        console.log("Disconnected:", reason);
-        setConnectionStatus(`Disconnected: ${reason}`);
-      };
+  //     const handleDisconnect = (reason: string): void => {
+  //       console.log("Disconnected:", reason);
+  //       setConnectionStatus(`Disconnected: ${reason}`);
+  //     };
 
-      socketRef.current.socket.on("connect", handleConnect);
-      socketRef.current.socket.on("connect_error", handleConnectError);
-      socketRef.current.socket.on("disconnect", handleDisconnect);
-    }
-  }, [currentUser]);
+  //     socketRef.current.socket.on("connect", handleConnect);
+  //     socketRef.current.socket.on("connect_error", handleConnectError);
+  //     socketRef.current.socket.on("disconnect", handleDisconnect);
+  //   }
+  // }, [currentUser]);
 
-  useEffect(() => {
-    setupSocket();
+  // useEffect(() => {
+  //   setupSocket();
 
-    return () => {
-      console.log("Cleaning up socket connection");
-      if (socketRef.current.socket) {
-        socketRef.current.socket.off("connect");
-        socketRef.current.socket.off("connect_error");
-        socketRef.current.socket.off("disconnect");
-        socketRef.current.socket.disconnect();
-        socketRef.current.socket = null;
-      }
-    };
-  }, [setupSocket]);
+  //   return () => {
+  //     console.log("Cleaning up socket connection");
+  //     if (socketRef.current.socket) {
+  //       socketRef.current.socket.off("connect");
+  //       socketRef.current.socket.off("connect_error");
+  //       socketRef.current.socket.off("disconnect");
+  //       socketRef.current.socket.disconnect();
+  //       socketRef.current.socket = null;
+  //     }
+  //   };
+  // }, [setupSocket]);
 
   return (
     <section className="flex justify-center items-center w-full h-screen bg-white overflow-x-hidden">
@@ -190,9 +182,10 @@ const AllConversations: React.FC<Token> = ({ token }) => {
           </aside>
           <aside className="h-[90vh] flex justify-center items-start w-full mt-8 overflow-y-scroll -20">
             {/* <Contacts contacts={contacts} changeChat={handleChatChange} /> */}
-            {socketRef.current.socket && (
+            <ChatContainer token={token} />
+            {/* {socketRef.current.socket && (
               <ChatContainer token={token} socketRef={socketRef} />
-            )}
+            )} */}
           </aside>
         </div>
       )}
