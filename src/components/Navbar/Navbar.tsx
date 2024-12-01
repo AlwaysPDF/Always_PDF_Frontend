@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 import Image from "next/image";
-import fullColorLogo from "../../../public/assets/fullColorLogo.png";
+import fullColorLogo from "../../../public/assets/coloredLogo.svg";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -34,7 +34,7 @@ const Navbar = () => {
   return (
     <nav className="flex justify-center items-center w-full">
       <div className="bg-white drop-shadow-[0px_4px_60px_0px_#FFFFFF_inset] flex justify-between items-center w-[90%] py-2 px-4 mt-6 rounded-md">
-        <aside className="w-[10%] llg:w-[40%] flex justify-center items-center">
+        <aside className="w-[12%] llg:w-[40%] flex justify-center items-center">
           <Image
             src={fullColorLogo}
             alt="Ever PDF Logo"

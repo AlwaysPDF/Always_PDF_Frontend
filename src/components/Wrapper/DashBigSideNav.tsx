@@ -1,6 +1,6 @@
 "use client";
 import { useAppContext } from "../ContextApi/ContextApi";
-import coloredLogo from "../../../public/assets/coloredLogo.png";
+import coloredLogo from "../../../public/assets/coloredLogo.svg";
 import { useRouter } from "next/navigation";
 import DashNavLinks from "./DashNavLinks";
 import Image from "next/image";
@@ -47,9 +47,9 @@ const DashBigSideNav = () => {
             <Image
               src={coloredLogo}
               alt="Always PDF Logo"
-              className="w-[62%] h-full object-cover cursor-pointer"
+              className="w-[62%] h-full cursor-pointer"
             />
-            <div className="bg-[#E2FFDB] text-[#00B800] px-3 py-1 rounded-lg ml-2">
+            <div className="bg-[#E2FFDB] text-[#00B800] px-3 py-1 rounded-lg ml-2 text-sm">
               <p>{tier}</p>
             </div>
           </div>

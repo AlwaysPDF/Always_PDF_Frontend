@@ -1,5 +1,5 @@
 import Image from "next/image";
-import footerLogo from "../../../public/assets/footerLogo.svg";
+import footerLogo from "../../../public/assets/coloredLogo.svg";
 import bigLogo from "../../../public/assets/bigLogo.svg";
 
 import { FaFacebook, FaLinkedin, FaXTwitter } from "react-icons/fa6";
@@ -26,7 +26,7 @@ const Footer = () => {
       <div className="w-[80%] llg:w-[95%] flex justify-between llg:justify-center items-start flex-col pt-14">
         <main className="grid lg:grid-cols-4  lsm:grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex justify-start items-start flex-col">
-            <Image src={footerLogo} alt="Always PDF White Logo" priority />
+            <Image src={footerLogo} alt="Always PDF White Logo" style={{ filter: "brightness(0) invert(1)" }} priority />
             <div className="flex justify-center items-center gap-6 mt-2">
               {socialLinks?.map((item, i) => (
                 <a key={i} href={item?.links}>

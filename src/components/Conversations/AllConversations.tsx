@@ -15,17 +15,17 @@ interface Token {
   token?: string;
 }
 
-const ErrorComponent  = () => (
-  <div>
-    <p>An error occurred while viewing the file.</p>
-    <button
-      className="px-6 py-2 bg-deepblue rounded-md"
-      onClick={() => window.location.reload()}
-    >
-      Retry
-    </button>
-  </div>
-);
+// const ErrorComponent  = () => (
+//   <div>
+//     <p>An error occurred while viewing the file.</p>
+//     <button
+//       className="px-6 py-2 bg-deepblue rounded-md"
+//       onClick={() => window.location.reload()}
+//     >
+//       Retry
+//     </button>
+//   </div>
+// );
 
 const AllConversations: React.FC<Token> = ({ token }) => {
   const {
@@ -38,7 +38,7 @@ const AllConversations: React.FC<Token> = ({ token }) => {
     setPdfText,
   } = useAppContext();
 
-  const [currentDocument, setCurrentDocument] = useState(0);
+  // const [currentDocument, setCurrentDocument] = useState(0);
 
   const docs = [
     {
