@@ -26,6 +26,18 @@
   height: 1rem;
 }
 
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  border: none;
+  background-color: transparent;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background: none;
+  height: 1rem;
+}
+
 body {
   font-family: "Ubuntu", sans-serif;
 }
@@ -83,4 +95,8 @@ body {
 
 .noscrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.spaces > p, .spaces ol li{
+  padding-bottom: 20px;
 }

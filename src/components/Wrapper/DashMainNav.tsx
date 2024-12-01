@@ -71,7 +71,7 @@ const DashMainNav = () => {
 
   return (
     <nav className=" w-full fixed top-0 h-[15vh]">
-      <div className="lg:pl-[220px] flex justify-center items-center  w-full h-full lg:w-[95%] z-[9999999] bg-white">
+      <div className="lg:pl-[220px] flex justify-center items-center  w-full h-full lg:w-[95%] z-[99999999999999999] bg-white">
         <div className="w-[95vw] llg:w-[95%] h-full flex justify-center items-center border-b border-borderGrey py-4">
           <main className="flex justify-between items-center py- w-full">
             {/* close and open button */}

@@ -43,7 +43,7 @@ const ChatInput: React.FC<ChatFunctionDetails> = ({ handleSendMsg }) => {
   return (
     // <Container>
     <section className="w-full">
-      <div className="button-container w-full">
+      <div className=" w-full">
         <div className="emoji">
           {/* <BsEmojiSmileFill onClick={handleEmojiPickerhideShow} />
           {showEmojiPicker && <Picker onEmojiClick={handleEmojiClick} />} */}

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
-import { Socket } from "socket.io-client";
+// import { Socket } from "socket.io-client";
 import { axiosInstanceWithHeader } from "@/utils/AxiosHeader";
 import { useAppContext } from "../ContextApi/ContextApi";
 import { PulseLoader } from "react-spinners";
@@ -9,14 +9,8 @@ import { marked } from "marked";
 import halfLogo from "../../../public/assets/halfLogo.png";
 import ChatInput from "./ChatInput";
 
-// interface SocketRef {
-//   socket: Socket | null;
-//   id: string | undefined;
-// }
-
 interface ChatContainerProps {
   token?: string;
-  // socketRef: MutableRefObject<SocketRef>;
 }
 
 type ChatMessage = {
@@ -25,15 +19,12 @@ type ChatMessage = {
 };
 
 const ChatContainer: React.FC<ChatContainerProps> = ({
-  // currentChat,
   token,
-  // socketRef,
 }) => {
   const { currentUser, setLoadingActive, pdfText } = useAppContext();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
-  // const socketRef = useRef<SocketRef>({ socket: null, id: null });
   const [arrivalMessage, setArrivalMessage] = useState<ChatMessage | null>(
     null
   );
@@ -51,45 +42,16 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
       }
     };
     fetchMessage();
-
-    // Set up socket message handler
-    // const handleReceiveMessage = (msg: string) => {
-    //   setMessages((prev) => [...prev, { fromSelf: false, message: msg }]);
-    //   setIsLoading(false);
-    // };
-
-    // if (socketRef.current?.socket) {
-    //   socketRef.current.socket.on("msg-recieve", (message) => {
-    //     // setMessages((prevMessages) => [...prevMessages, message]);
-    //     // setIsLoading(false);
-    //   });
-    // }
-
-    // Cleanup on component unmount
-    // return () => {
-    //   if (socketRef.current?.socket) {
-    //     socketRef.current.socket.off("msg-recieve", handleReceiveMessage);
-    //   }
-    // };
   }, [token]);
 
   const handleSendMsg = async (question: string) => {
-    // if (!socket.current) return;
-    // if (!socketRef?.current?.socket || !question.trim()) return;
     if (!question.trim()) return;
 
     const newMessage = { fromSelf: true, message: question };
     setMessages((prev) => [...prev, newMessage]);
     setIsLoading(true); // Start loading state
 
-    // socketRef.current.socket.emit("send-msg", {
-    //   from: currentUser?.userId,
-    //   pdfText,
-    //   documentId: token,
-    //   question,
-    // });
     try {
-      // setLoadingActive?.(true);
       const res = await axiosInstanceWithHeader.post("/messages/addMessage", {
         pdfText,
         documentId: token,
@@ -105,22 +67,6 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
     }
   };
 
-  // useEffect(() => {
-  //   if (socketRef.current.socket) {
-  //     socketRef.current.socket.on("msg-recieve", (msg) => {
-  //       setArrivalMessage({ fromSelf: false, message: msg });
-  //       setIsLoading(false);
-  //       console.log(msg);
-  //     });
-  //   }
-  // }, [socketRef.current.socket]);
-
-  // useEffect(() => {
-  //   arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
-  // }, [arrivalMessage]);
-
-  console.log(arrivalMessage);
-
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -128,43 +74,14 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   const formatResponseWithMarkdown = (response: string) => {
     // Convert markdown to HTML
     const htmlContent = marked(response);
-    return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
+    return <div className="spaces" dangerouslySetInnerHTML={{ __html: htmlContent }} />;
   };
-
-  // const formatResponse = (response) => {
-  //   // Handle line breaks and code blocks in the response
-  //   return response.split('\n').map((line, index) => {
-  //     if (line.startsWith("```") && line.endsWith("```")) {
-  //       // Handle inline code
-  //       return (
-  //         <pre key={index} style={{ background: "#f5f5f5", padding: "10px" }}>
-  //           <code>{line.replace(/```/g, '')}</code>
-  //         </pre>
-  //       );
-  //     } else if (line.startsWith("```")) {
-  //       // Start of a code block
-  //       return (
-  //         <pre key={index} style={{ background: "#f5f5f5", padding: "10px" }}>
-  //           <code>{line.replace("```", "")}</code>
-  //         </pre>
-  //       );
-  //     } else if (line.endsWith("```")) {
-  //       // End of a code block
-  //       return (
-  //         <pre key={index} style={{ background: "#f5f5f5", padding: "10px" }}>
-  //           <code>{line.replace("```", "")}</code>
-  //         </pre>
-  //       );
-  //     }
-  //     return <p key={index}>{line}</p>;
-  //   });
-  // };
   
 
   // Your component logic here
   return (
     <main className="w-full flex justify-center items-center flex-col">
-      <aside className="-[1rem_2rem] flex flex-col gap-4 w-full">
+      <aside className="-[1rem_2rem] flex flex-col gap-4 w-full !overflow-y-scroll !h-[80vh] scrollbar mb-4">
         {messages.map((message, i) => {
           return (
             <div ref={scrollRef} key={i} className="w-full">
@@ -217,7 +134,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
           </div>
         )}
       </aside>
-      <aside className="w-[30%] llg:w-[90%] flex justify-end fixed bottom-0">
+      <aside className="w-full llg:w-[90%] flex justify-end bottom-0">
         <ChatInput handleSendMsg={handleSendMsg} />
       </aside>
     </main>
