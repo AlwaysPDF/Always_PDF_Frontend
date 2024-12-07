@@ -36,8 +36,7 @@ export default {
       fontFamily: {
         Ubuntu: ["Ubuntu", "sans-serif"],
         Inter: ["Inter", "sans-serif"],
-        Arimo: ["Arimo", "sans-serif"],
-        Helvetica: ["'Helvetica Neue'", "sans-serif"],
+        Onest: ["Onest", "sans-serif"],
       },
     },
   },

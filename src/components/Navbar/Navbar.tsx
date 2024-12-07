@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 import Image from "next/image";
-import fullColorLogo from "../../../public/assets/coloredLogo.svg";
 import Link from "next/link";
-
+import logoLand from "../../../public/assets/logoLand.svg";
 const Navbar = () => {
   const links = [
     { name: "Home", point: "#home" },
@@ -30,23 +29,17 @@ const Navbar = () => {
     const userToken = Cookies.get("UserToken");
     setToken?.(userToken || null); // Set token once available on client
   }, []);
-
   return (
-    <nav className="flex justify-center items-center w-full">
-      <div className="bg-white drop-shadow-[0px_4px_60px_0px_#FFFFFF_inset] flex justify-between items-center w-[90%] py-2 px-4 mt-6 rounded-md">
-        <aside className="w-[12%] llg:w-[40%] flex justify-center items-center">
-          <Image
-            src={fullColorLogo}
-            alt="Ever PDF Logo"
-            className="w-full"
-            priority
-          />
+    <section className="flex justify-center items-center w-full">
+      <div className="flex justify-between items-center w-[90%]">
+        <aside>
+          <Image src={logoLand} alt="Always PDF" />
         </aside>
-        <aside className="hidden md:flex justify-center items-center">
+        <aside className="glassmorphism-navbar">
           <ul className="flex justify-center items-center flex-col md:flex-row">
             {links?.map((item, i) => (
               <li
-                className="mr-4 last:mr-0 text-basicBlue text-[16px] font-Ubuntu font-semibold cursor-pointer"
+                className="mr-4 last:mr-0 text-white text-[16px] font-Ubuntu font-semibold cursor-pointer"
                 key={i}
               >
                 <Link href={item?.point}>{item?.name}</Link>
@@ -54,46 +47,48 @@ const Navbar = () => {
             ))}
           </ul>
         </aside>
-        {token !== null ? (
-          <>
-            <Link
-              href="/dashboard/my-documents"
-              className="text-[#EAF5FF] bg-basicBlue px-6 py-2 rounded-md hidden md:block"
-            >
-              My Documents
-            </Link>
-          </>
-        ) : (
-          <aside className="hidden md:flex justify-center items-center">
-            <Link
-              href="/auth/signin"
-              className="bg-[#EAF5FF] border border-basicBlue text-basicBlue px-4 mr-4 py-2 rounded-md"
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/auth/email"
-              className="text-[#EAF5FF] bg-basicBlue px-4 py-2 rounded-md"
-            >
-              Create a free acount
-            </Link>
-          </aside>
-        )}
-
-        {/* Nav Buttons */}
-        {/* Nav Buttons */}
-
-        <button className="md:hidden cursor-pointer " onClick={handleClick}>
-          {nav ? (
-            <i className="fa-solid fa-x text-basicBlue"></i>
+        <aside>
+          {token !== null ? (
+            <>
+              <Link
+                href="/dashboard/my-documents"
+                className="text-[#EAF5FF] bg-basicBlue px-6 py-2 rounded-md hidden md:block"
+              >
+                My Documents
+              </Link>
+            </>
           ) : (
-            <i className="fa-solid fa-bars text-basicBlue"></i>
+            <aside className="hidden md:flex justify-center items-center gap-4">
+              <Link
+                href="/auth/email"
+                className="text-[#EAF5FF] bg-basicBlue px-4 py-2 rounded-full"
+              >
+                Create a free acount
+              </Link>
+              <Link
+                href="/auth/signin"
+                className="bg-[#EAF5FF] border text-black px-4 py-2 rounded-full"
+              >
+                Sign In
+              </Link>
+            </aside>
           )}
-        </button>
-        {/* Nav Buttons */}
-        {/* Nav Buttons */}
+
+          {/* Nav Buttons */}
+          {/* Nav Buttons */}
+
+          <button className="md:hidden cursor-pointer " onClick={handleClick}>
+            {nav ? (
+              <i className="fa-solid fa-x text-basicBlue"></i>
+            ) : (
+              <i className="fa-solid fa-bars text-basicBlue"></i>
+            )}
+          </button>
+          {/* Nav Buttons */}
+          {/* Nav Buttons */}
+        </aside>
       </div>
-    </nav>
+    </section>
   );
 };
 

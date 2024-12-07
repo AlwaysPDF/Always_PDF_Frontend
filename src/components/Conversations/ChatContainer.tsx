@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import { Socket } from "socket.io-client";
 import { axiosInstanceWithHeader } from "@/utils/AxiosHeader";
 import { useAppContext } from "../ContextApi/ContextApi";
@@ -21,13 +21,13 @@ type ChatMessage = {
 const ChatContainer: React.FC<ChatContainerProps> = ({
   token,
 }) => {
-  const { currentUser, setLoadingActive, pdfText } = useAppContext();
+  const { pdfText } = useAppContext();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
-  const [arrivalMessage, setArrivalMessage] = useState<ChatMessage | null>(
-    null
-  );
+  // const [arrivalMessage, setArrivalMessage] = useState<ChatMessage | null>(
+  //   null
+  // );
 
   useEffect(() => {
     // Load initial chat history (optional)
