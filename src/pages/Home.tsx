@@ -1,13 +1,13 @@
 "use client";
 
-import ScrollToHash from "@/utils/ScrollToHash";
+// import ScrollToHash from "@/utils/ScrollToHash";
 import Hero from "@/components/HomePage/Hero";
-import Footer from "@/components/Footer/Footer";
+// import Footer from "@/components/Footer/Footer";
 
 const Home = () => {
   return (
     <main className="">
-      <ScrollToHash />
+      {/* <ScrollToHash /> */}
       <div id="home">
         <Hero />
       </div>

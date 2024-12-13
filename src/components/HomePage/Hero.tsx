@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <section className="bg-black w-full h-auto flex justify-center items-center flex-col">
          <iframe
-        src="/index.html"
+        src={`/index.html?timestamp=${new Date().getTime()}`}
         title="Embedded Content"
         width="100%"
         // height="500px"

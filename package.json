@@ -25,6 +25,7 @@
     "motion": "^11.12.0",
     "next": "^14.2.17",
     "prettier": "^3.3.2",
+    "pspdfkit": "^2024.8.0",
     "react": "^18",
     "react-doc-viewer": "^0.1.14",
     "react-dom": "^18",
