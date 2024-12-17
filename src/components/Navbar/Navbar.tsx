@@ -59,7 +59,7 @@ const Navbar = () => {
           <>
             <Link
               href="/dashboard/my-documents"
-              className="text-[#EAF5FF] bg-basicBlue px-6 py-2 rounded-md block"
+              className="text-[#EAF5FF] bg-basicBlue px-6 py-2 rounded-md hidden md:block"
             >
               My Documents
             </Link>
@@ -116,7 +116,7 @@ const Navbar = () => {
           <>
             <Link
               href="/dashboard/my-documents"
-              className="text-[#EAF5FF] bg-basicBlue px-6 py-2 rounded-md hidden md:block"
+              className="text-[#EAF5FF] bg-basicBlue px-6 py-2 rounded-md block"
             >
               My Documents
             </Link>
