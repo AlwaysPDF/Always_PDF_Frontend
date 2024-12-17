@@ -77,7 +77,7 @@ const Features = () => {
           </h1>
           {/* <span className="bg-[#FFC71F] h-[4px] w-full absolute z-[-3] bottom-[10px] "></span> */}
         </aside>
-        <aside className="grid lg:grid-cols-2 gap-4">
+        <aside className="grid justify-center lg:grid-cols-2 gap-4">
           <div className="flex flex-col">
             {feature.map((item, i) => (
               <div key={i} className="flex items-start relative mb-8 last:mb-0">
@@ -102,7 +102,7 @@ const Features = () => {
               </div>
             ))}
           </div>
-          <div>
+          <div className="lmd:hidden">
             <Image src={chatbox} alt="Chat Box" />
           </div>
         </aside>

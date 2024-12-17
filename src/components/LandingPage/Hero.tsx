@@ -53,7 +53,7 @@ const Hero = () => {
     //   </div>
     // </section>
 
-    <section className="bg-[#021221] w-full h-auto flex justify-center items-center flex-col lmd:mt-16">
+    <section className="bg-[#021221] w-full h-auto flex justify-center items-center flex-col lmd:mt-14">
       <Navbar />
       <main className="bg-[#021221] h-screen bg-cover w-full ">
         <div className="bg-[url('/assets/heroshadow.svg')] bg-no-repeat bg-center bg-cover h-full w-full flex justify-start items-center flex-col py-16">
@@ -62,7 +62,7 @@ const Hero = () => {
               Introducing AlwaysPDF
             </p>
           </div>
-          <h1 className="text-white text-6xl font-semibold !font-Onest lg:max-w-[40%] text-center">
+          <h1 className="text-white lg:text-6xl md:text-4xl lmd:text-3xl font-semibold !font-Onest lg:max-w-[40%] text-center">
             Turn your boring documents into conversations
           </h1>
           <p className="text-[#E2E8F0] font-Onest text-lg font-medium my-2">

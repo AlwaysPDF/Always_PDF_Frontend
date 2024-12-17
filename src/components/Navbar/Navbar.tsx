@@ -43,7 +43,7 @@ const Navbar = () => {
             priority
           />
         </aside>
-        <aside className="hidden md:flex justify-center items-center">
+        <aside className="hidden lg:flex justify-center items-center">
           <ul className="flex justify-center items-center flex-col md:flex-row gap-14">
             {links?.map((item, i) => (
               <li
@@ -111,6 +111,33 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
+          <div className="mt-4">
+          {token !== null ? (
+          <>
+            <Link
+              href="/dashboard/my-documents"
+              className="text-[#EAF5FF] bg-basicBlue px-6 py-2 rounded-md hidden md:block"
+            >
+              My Documents
+            </Link>
+          </>
+        ) : (
+          <aside className="flex justify-center items-center flex-col gap-6">
+            <Link
+              href="/auth/signin"
+              className="bg-[#EAF5FF] border border-basicBlue text-basicBlue px-4 mr-4 py-2 rounded-md"
+            >
+              Sign In
+            </Link>
+            <Link
+              href="/auth/email"
+              className="text-[#EAF5FF] bg-basicBlue px-4 py-2 rounded-md"
+            >
+              Create a free acount
+            </Link>
+          </aside>
+        )}
+          </div>
         </div>
       )}
     </nav>

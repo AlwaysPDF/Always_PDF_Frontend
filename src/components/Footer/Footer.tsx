@@ -23,9 +23,9 @@ const Footer = () => {
   const year = new Date().getFullYear();
   return (
     <section className="flex justify-center items-center w-full bg-[#141F49]">
-      <div className="w-[80%] llg:w-[95%] flex justify-between llg:justify-center items-start flex-col pt-14">
-        <main className="grid lg:grid-cols-2 lsm:grid-cols-1 md:grid-cols-1 gap-6 w-full">
-          <div className="flex justify-start items-start flex-col">
+      <div className="w-[80%] llg:w-[95%] flex justify-between llg:justify-center items-start llg:items-center flex-col pt-14">
+        <main className="grid md:grid-cols-2 lmd:grid-cols-1 gap-6 w-full">
+          <div className="flex justify-start items-start lmd:justify-center lmd:items-center flex-col">
             <Image
               src={footerLogo}
               alt="Always PDF White Logo"
@@ -40,7 +40,7 @@ const Footer = () => {
               ))}
             </div>
           </div>
-          <div className="flex gap-8 lmd:flex-col uppercase">
+          <div className="flex gap-8 lmd:gap-4 lmd:flex-col uppercase lmd:hidden">
             {hashLinks?.map((item, i) => (
               <p
                 key={i}
@@ -71,7 +71,7 @@ const Footer = () => {
         <hr className="bg-white w-full my-14" />
         <main className="w-full">
           {/* <Image src={bigLogo} alt="Always PDF White Big Logo" priority /> */}
-          <div className="flex justify-center items-center w-full gap-10">
+          <div className="flex justify-center items-center w-full gap-10 lmd:gap-4 lmd:flex-col lmd:hidden">
             {[
               "About EverPDF",
               "Privacy Policy",
@@ -83,7 +83,7 @@ const Footer = () => {
               </p>
             ))}
           </div>
-            <p className="text-center text-white mb-8 mt-10">Copyright © {year} alwayspdf.com. All rights reserved</p>
+            <p className="text-center text-white mb-8 md:mt-10 lsm:text-sm">Copyright © {year} alwayspdf.com. All rights reserved</p>
         </main>
       </div>
     </section>
