@@ -113,13 +113,13 @@ const DashMainNav = () => {
               >
                 <FiUpload className="mr-2" /> Upload
               </button> */}
-              <button
+              {/* <button
                 type="submit"
                 className="font-Ubuntu font-medium border border-basicBlue text-basicBlue rounded-md px-4 py-2 flex justify-center items-center llg:hidden"
               >
                 <IoChatbubbleEllipsesOutline className="mr-2" /> Past
                 Conversations
-              </button>
+              </button> */}
               <button
                 onClick={() => handleLogOut()}
                 className="font-Ubuntu font-medium bg-basicBlue text-[#FAFAFA] px-4 py-2 rounded-md flex justify-center items-center ml-6"

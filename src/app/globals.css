@@ -33,11 +33,11 @@
   width: 5px;
 }
 .scrollbar::-webkit-scrollbar-track {
-  border: none;
-  background-color: transparent;
+  border: none !important;
+  background-color: transparent !important;
 }
 .scrollbar::-webkit-scrollbar-thumb {
-  background: none;
+  background: transparent !important;
   height: 1rem;
 }
 

@@ -2,7 +2,7 @@
 import { useAppContext } from "@/components/ContextApi/ContextApi";
 import Link from "next/link";
 import { ClipLoader } from "react-spinners";
-import fullColorLogo from "../../public/assets/fullColorLogo.png";
+import coloredLogo from "../../public/assets/coloredLogo.svg";
 import Image from "next/image";
 
 interface IsAuthNecessary {
@@ -20,7 +20,7 @@ export const AuthHeader: React.FC<IsAuthNecessary> = ({ isAuth }) => {
       <div className="flex justify-center items-center flex-col">
         <div className="w-[50%]">
           <Image
-            src={fullColorLogo}
+            src={coloredLogo}
             alt="Full Color Logo"
             className="w-full h-full"
           />

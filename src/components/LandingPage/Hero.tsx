@@ -58,7 +58,7 @@ const Hero = () => {
       <main className="bg-[#021221] lg:min-h-[60vh] bg-coer w-full flex justify-center items-center">
         <div className="bg-[url('/assets/heroshadow.svg')] bg-no-repeat bg-center bg-cover h-full w-full flex justify-center items-center flex-col py-16">
           <div>
-            <p className="text-white text-sm font-Onest">
+            <p className="text-white bg-[#FAFAFA] text-sm font-Onest">
               Introducing AlwaysPDF
             </p>
           </div>

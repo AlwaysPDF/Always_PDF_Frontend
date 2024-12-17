@@ -89,7 +89,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
                 className={`flex items-center max-w-full ${message.fromSelf ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`flex items-start p-2 text-lg rounded-md ${message.fromSelf ? "justify-end border border-[#DEDEDE] max-w-[95%] w-[95%]" : "justify-start max-w-[95%] w-[95%]"}`}
+                  className={`flex items-start px-2 text-lg rounded-md ${message.fromSelf ? "justify-end border border-[#DEDEDE] max-w-[95%] w-[95%]" : "justify-start max-w-[95%] w-[95%]"}`}
                 >
                   {!message?.fromSelf && (
                     <div
