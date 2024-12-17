@@ -20,43 +20,43 @@ const Faq = () => {
 
   const items = [
     {
-      title: "What is EverPDF",
+      title: "What is AlwaysPDF",
       content: "I am a developer",
     },
     {
-      title: "How do I upload a document to EverPDF?",
+      title: "How do I upload a document to AlwaysPDF?",
       content: "I am a developer",
     },
     {
-      title: "Can EverPDF handle multiple documents at once?",
+      title: "Can AlwaysPDF handle multiple documents at once?",
       content: "I am a developer",
     },
     {
-      title: "How secure is my data with EverPDF?",
+      title: "How secure is my data with AlwaysPDF?",
       content: "I am a developer",
     },
     {
-      title: "Are there any limitations to the free version of EverPDF?",
+      title: "Are there any limitations to the free version of AlwaysPDF?",
       content: "I am a developer",
     },
     {
-      title: "How accurate are the answers provided by EverPDF?",
+      title: "How accurate are the answers provided by AlwaysPDF?",
       content: "I am a developer",
     },
     {
-      title: "What types of questions can I ask EverPDF?",
+      title: "What types of questions can I ask AlwaysPDF?",
       content: "I am a developer",
     },
     {
-      title: "Can EverPDF be used for professional or academic research?",
+      title: "Can AlwaysPDF be used for professional or academic research?",
       content: "I am a developer",
     },
     {
-      title: "Is customer support available for EverPDF users?",
+      title: "Is customer support available for AlwaysPDF users?",
       content: "I am a developer",
     },
     {
-      title: "What makes EverPDF different from other PDF readers?",
+      title: "What makes AlwaysPDF different from other PDF readers?",
       content: "I am a developer",
     },
   ];

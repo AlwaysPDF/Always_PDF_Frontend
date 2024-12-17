@@ -52,7 +52,7 @@ const Footer = () => {
           </div>
           {/* <div>
             {[
-              "About EverPDF",
+              "About AlwaysPDF",
               "Privacy Policy",
               "Terms of Service",
               "Contact Us",
@@ -73,7 +73,7 @@ const Footer = () => {
           {/* <Image src={bigLogo} alt="Always PDF White Big Logo" priority /> */}
           <div className="flex justify-center items-center w-full gap-10 lmd:gap-4 lmd:flex-col lmd:hidden">
             {[
-              "About EverPDF",
+              "About AlwaysPDF",
               "Privacy Policy",
               "Terms of Service",
               "Contact Us",

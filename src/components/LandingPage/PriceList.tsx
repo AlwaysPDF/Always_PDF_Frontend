@@ -53,7 +53,7 @@ const PriceList = () => {
         </aside>
         <p className="mb-12 text-center text-white">
           Choose the plan that best fits your needs and unlock the full
-          potential of your PDFs with EverPDF. <br />
+          potential of your PDFs with AlwaysPDF. <br />
           Note: All plans come with a 14-day free trial
         </p>
         <main className="grid grid-cols-3 lmd:grid-cols-1 gap-10 w-[90%] justify-center">

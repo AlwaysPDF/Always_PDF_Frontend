@@ -27,7 +27,7 @@ export const AuthHeader: React.FC<IsAuthNecessary> = ({ isAuth }) => {
         </div>
         <p className="font-Ubuntu text-offblack font-medium text-[16px] mt-4 mb-2">
           {isAuth === "email"
-            ? "Welcome to EverPDF"
+            ? "Welcome to AlwaysPDF"
             : isAuth === "verify"
               ? "Verify your email address"
               : isAuth === "create"
@@ -36,7 +36,7 @@ export const AuthHeader: React.FC<IsAuthNecessary> = ({ isAuth }) => {
         </p>
         <h1 className="text-basicBlue font-Ubuntu font-semibold text-xl mb-6 text-center">
           {isAuth === "email"
-            ? "Create a EverPDF Account"
+            ? "Create a AlwaysPDF Account"
             : isAuth === "verify"
               ? "Enter the OTP sent to your Email"
               : isAuth === "create"
