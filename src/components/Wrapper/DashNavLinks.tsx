@@ -12,13 +12,13 @@ const DashNavLinks = () => {
     {
       icon: <IoLogoWechat />,
       name: "Conversations",
-      link: "/dashboard/conversations",
-    },
-    {
-      icon: <HiClipboardDocumentList />,
-      name: "My Documents",
       link: "/dashboard/my-documents",
     },
+    // {
+    //   icon: <HiClipboardDocumentList />,
+    //   name: "My Documents",
+    //   link: "/dashboard/my-documents",
+    // },
   ];
 
    // Check if the path contains either "my-documents" or "conversations"

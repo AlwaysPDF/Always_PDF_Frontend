@@ -59,7 +59,7 @@ const Navbar = () => {
           <>
             <Link
               href="/dashboard/my-documents"
-              className="text-[#EAF5FF] bg-basicBlue px-6 py-2 rounded-md hidden md:block"
+              className="text-[#EAF5FF] bg-basicBlue px-6 py-2 rounded-md block"
             >
               My Documents
             </Link>
@@ -97,8 +97,8 @@ const Navbar = () => {
 
       {/* Mobile Navbar Overlay */}
       {nav && (
-        <div className="fixed top-20 pt-2 left-0 w-full h-screen bg-[#021221] bg-opacity-90 flex flex-col justify-start items-center transition-all duration-300 ease-in-out">
-          <ul className="flex flex-col items-center gap-6">
+        <div className="fixed top-14 pt-2 left-0 w-full h-screen bg-[#021221] bg-opacity-90 flex flex-col justify-start items-center transition-all duration-300 ease-in-out text-center">
+          <ul className="flex flex-col items-center gap-6 ">
             {links.map((item, i) => (
               <li key={i} className="text-white text-xl">
                 {/* <Link

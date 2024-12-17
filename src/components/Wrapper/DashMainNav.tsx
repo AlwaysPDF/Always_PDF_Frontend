@@ -94,7 +94,7 @@ const DashMainNav = () => {
               </div>
               <div className="">
                 <h1 className="text-closedark font-Ubuntu font-medium text-lg mb-0 pb-0">
-                  EverPDF
+                 AlwaysPDF
                 </h1>
                 <p
                   className={`${isOnline ? "text-[#00B800]" : "text-[red]"} text-[10px] font-Ubuntu`}
