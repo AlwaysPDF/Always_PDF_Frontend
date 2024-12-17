@@ -58,7 +58,7 @@ const Hero = () => {
       <main className="bg-[#021221] lg:min-h-[60vh] bg-coer w-full flex justify-center items-center">
         <div className="bg-[url('/assets/heroshadow.svg')] bg-no-repeat bg-center bg-cover h-full w-full flex justify-center items-center flex-col py-16">
           <div>
-            <p className="text-white bg-[#FAFAFA] text-sm font-Onest">
+            <p className="text-{#021221} bg-white text-xs font-Onest rounded-full px-4 ">
               Introducing AlwaysPDF
             </p>
           </div>
@@ -68,7 +68,7 @@ const Hero = () => {
           {/* <p className="text-[#E2E8F0] font-Onest text-lg font-medium my-2">
             Innovative. Intuitive. Insightful.
           </p> */}
-          <span className="text-white text-sm font-light text-center lg:max-w-[50%]">
+          <span className="text-white text-sm font-light text-center lg:max-w-[50%] w-[90%] mt-2 font-Inter">
             Ask questions, get instant answers, and uncover insights effortlessly. With AlwaysPDF, your documents finally talk back
           </span>
 
