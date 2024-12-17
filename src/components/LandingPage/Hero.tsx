@@ -55,7 +55,7 @@ const Hero = () => {
 
     <section className="bg-[#021221] w-full flex justify-center items-center flex-col lmd:mt-14">
       <Navbar />
-      <main className="bg-[#021221] lg:h-screen bg-cover w-full ">
+      <main className="bg-[#021221] lg:min-h-[60vh] bg-coer w-full ">
         <div className="bg-[url('/assets/heroshadow.svg')] bg-no-repeat bg-center bg-cover h-full w-full flex justify-start items-center flex-col py-16">
           {/* <div>
             <p className="text-white text-sm font-Onest">

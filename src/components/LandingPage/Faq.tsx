@@ -21,43 +21,39 @@ const Faq = () => {
   const items = [
     {
       title: "What is AlwaysPDF",
-      content: "I am a developer",
+      content: "AlwaysPDF is an AI-powered web app that allows you to interact with your PDF documents using natural language. By leveraging advanced AI technology, AlwaysPDF enables users to ask questions about the content of their PDFs and receive instant, context-aware answers, making document reading, research, and analysis faster and more intuitive.",
     },
     {
       title: "How do I upload a document to AlwaysPDF?",
-      content: "I am a developer",
+      content: 'Uploading a document is simple and quick. After logging into your AlwaysPDF account, click on the "Upload Document" button, select the PDF file from your device, and confirm. Your document will then be securely uploaded, ready for you to interact with instantly.',
     },
     {
       title: "Can AlwaysPDF handle multiple documents at once?",
-      content: "I am a developer",
+      content: "Yes! With the Premium and Enterprise plans, AlwaysPDF supports multi-document analysis, allowing you to upload and analyze multiple PDFs simultaneously. You can ask questions that span across these documents, and AlwaysPDF will provide intelligent, consolidated answers.",
     },
     {
       title: "How secure is my data with AlwaysPDF?",
-      content: "I am a developer",
-    },
-    {
-      title: "Are there any limitations to the free version of AlwaysPDF?",
-      content: "I am a developer",
-    },
+      content: "At AlwaysPDF, security and privacy are top priorities. Your uploaded documents are encrypted and stored securely. We do not share your data with third parties, and all interactions are processed with advanced encryption protocols to ensure your information remains confidential.",
+    },  
     {
       title: "How accurate are the answers provided by AlwaysPDF?",
-      content: "I am a developer",
+      content: "AlwaysPDF provides highly accurate and context-aware responses powered by ChatGPT’s advanced natural language processing. While accuracy depends on the clarity and structure of your PDF, the tool is optimized to understand even complex documents and deliver precise answers.",
     },
     {
       title: "What types of questions can I ask AlwaysPDF?",
-      content: "I am a developer",
+      content: "You can ask any question related to your document's content. Whether you’re looking for a specific detail, a section summary, key highlights, or explanations of concepts, AlwaysPDF understands your queries and retrieves relevant, accurate answers efficiently.",
     },
     {
       title: "Can AlwaysPDF be used for professional or academic research?",
-      content: "I am a developer",
+      content: "Absolutely! AlwaysPDF is an excellent tool for professionals, students, and researchers. It simplifies document analysis, accelerates research, and makes working with complex PDFs much more efficient, saving hours of manual reading and searching.",
     },
     {
       title: "Is customer support available for AlwaysPDF users?",
-      content: "I am a developer",
+      content: "Yes, customer support is available to all users. Free plan users can access the community forum and FAQs, while Premium and Enterprise users enjoy priority email support and direct assistance to resolve issues or answer questions quickly.",
     },
     {
       title: "What makes AlwaysPDF different from other PDF readers?",
-      content: "I am a developer",
+      content: "Unlike traditional PDF readers, AlwaysPDF transforms PDFs into interactive experiences using AI-powered question-and-answer technology. Instead of manually searching for information, you can ask questions and get instant answers, saving time and making document analysis smarter and more efficient.",
     },
   ];
 

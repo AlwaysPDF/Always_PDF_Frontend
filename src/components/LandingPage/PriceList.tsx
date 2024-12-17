@@ -1,4 +1,5 @@
 import { Tick } from "@/utils/Icon";
+import Link from "next/link";
 import React from "react";
 
 const PriceList = () => {
@@ -63,12 +64,8 @@ const PriceList = () => {
               key={i}
             >
               <aside className="w-[90%] flex h-full flex-col">
-                <div
-                  className={`border-b py-2 border-white`}
-                >
-                  <h3
-                    className={`font-Ubuntu font-semibold mb-5 text-white`}
-                  >
+                <div className={`border-b py-2 border-white`}>
+                  <h3 className={`font-Ubuntu font-semibold mb-5 text-white`}>
                     {item?.name}{" "}
                     <small className="text-[14px] font-Ubuntu">
                       {item?.name === "Free Plan" ? "(Forever FREE)" : ""}
@@ -89,36 +86,46 @@ const PriceList = () => {
                   </h4>
                 </div>
                 <aside className="flex flex-col justify-between h-full">
-                <div className="mt-4">
-                  <h1 className="mb-4">Features</h1>
-                  <div>
-                    {item?.features?.map((feats, i) => (
-                      <div
-                        key={i}
-                        className="mb-4 flex justify-start items-center"
-                      >
-                        <Tick />
-                        {/* {item?.name === "Free Plan" ? (
+                  <div className="mt-4">
+                    <h1 className="mb-4">Features</h1>
+                    <div>
+                      {item?.features?.map((feats, i) => (
+                        <div
+                          key={i}
+                          className="mb-4 flex justify-start items-center"
+                        >
+                          <Tick />
+                          {/* {item?.name === "Free Plan" ? (
                           <FreeTick />
                         ) : item?.name === "Premium Plan" ? (
                           <PremiumTick />
                         ) : (
                           <EnterpriseTick />
                         )} */}
-                        <p className="ml-2">{feats}</p>
-                      </div>
-                    ))}
+                          <p className="ml-2">{feats}</p>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-                <div className="mt-auto flex justify-end flex-end">
-                  <button
-                    className={`w-full rounded-md py-2 bg-[#0070E0] text-white`}
-                  >
-                    {item?.name !== "Enterprise Plan"
-                      ? "Get Started"
-                      : "Contact Us"}
-                  </button>
-                </div>
+                  <div className="mt-auto flex justify-center text-center items-center ">
+                    {item.name !== "Enterprise Plan" && (
+                      <Link
+                        href="/auth/email"
+                        className={`w-full rounded-md py-2 bg-[#0070E0] text-white`}
+                      >
+                        {" "}
+                        Get Started
+                      </Link>
+                    )}
+                    {item.name === "Enterprise Plan" && (
+                      <Link
+                        href="mailto:alwayspdf2@gmail.com"
+                        className={`w-full rounded-md py-2 bg-[#0070E0] text-white`}
+                      >
+                        Contact Us
+                      </Link>
+                    )}
+                  </div>
                 </aside>
               </aside>
             </div>

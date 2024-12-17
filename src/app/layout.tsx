@@ -19,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="shortcut icon" href="/public/halfLogo.png" type="image/x-icon" />
         {/* External Stylesheets for Font Awesome */}
         <link
           rel="stylesheet"
