@@ -90,9 +90,7 @@ const Email = () => {
     setFormErrors?.(errors);
     // Set a cookie
     if (Object.keys(errors).length === 0) {
-      if (setLoadingActive) {
-        setLoadingActive(true);
-      }
+        setLoadingActive?.(true);
 
       if (userDetails) {
         Cookies.set("UserEmail", userDetails.email, { secure: true });
@@ -103,46 +101,31 @@ const Email = () => {
         .then((response) => {
           if (response?.data?.success === true) {
             window.location.href = "/auth/verify-email";
-            if (setToastMessage) {
-              setToastMessage({
-                text:
-                  response?.data?.msg ||
-                  "A confirmation code has been sent to your email address.",
-                type: "success",
-              });
-            }
-            if (setShowToast) {
-              setShowToast(true);
-            }
+            setToastMessage?.({
+              text:
+                response?.data?.msg ||
+                "A confirmation code has been sent to your email address.",
+              type: "success",
+            });
+            setShowToast?.(true);
             // Redirect to home page
           } else {
-            if (setToastMessage) {
-              setToastMessage({
-                text: response?.data?.msg || "Email already exists",
-                type: "error",
-              });
-            }
-          }
-        })
-        .catch((err) => {
-          if (setToastMessage) {
-            setToastMessage({
-              text: err?.response?.data?.msg || "Email already exists",
+            setToastMessage?.({
+              text: response?.data?.msg || "Email already exists",
               type: "error",
             });
           }
-          if (setShowToast) {
-            setShowToast(true);
-          }
+        })
+        .catch((err) => {
+          setToastMessage?.({
+            text: err?.response?.data?.msg || "Email already exists",
+            type: "error",
+          });
+          setShowToast?.(true);
         })
         .finally(() => {
-          // setUserDetails({userDetails.fullName == ""
-          if (setUserDetails) {
-            setUserDetails({ email: "" });
-          }
-          if (setLoadingActive) {
-            setLoadingActive(false);
-          }
+          setUserDetails?.({ email: "" });
+          setLoadingActive?.(false);
         });
     }
   };

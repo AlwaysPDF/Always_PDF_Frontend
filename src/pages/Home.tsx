@@ -1,17 +1,21 @@
 "use client";
 
-// import ScrollToHash from "@/utils/ScrollToHash";
-import Hero from "@/components/HomePage/Hero";
-// import Footer from "@/components/Footer/Footer";
+import ScrollToHash from "@/utils/ScrollToHash";
+import Hero from "@/components/LandingPage/Hero";
+import Faq from "@/components/LandingPage/Faq";
+import Features from "@/components/LandingPage/Features";
+import HowItWorks from "@/components/LandingPage/HowItWorks";
+import PriceList from "@/components/LandingPage/PriceList";
+import Footer from "@/components/Footer/Footer";
 
 const Home = () => {
   return (
     <main className="">
-      {/* <ScrollToHash /> */}
+      <ScrollToHash />
       <div id="home">
         <Hero />
       </div>
-      {/* <div id="features">
+      <div id="features">
         <Features />
       </div>
       <div id="how-it-works">
@@ -22,8 +26,8 @@ const Home = () => {
       </div>
       <div id="faq">
         <Faq />
-      </div> */}
-      {/* <Footer /> */}
+      </div>
+      <Footer />
     </main>
   );
 };

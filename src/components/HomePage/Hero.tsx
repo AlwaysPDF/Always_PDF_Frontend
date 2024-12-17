@@ -1,9 +1,10 @@
+import Image from "next/image";
 import Navbar from "../Navbar/Navbar";
 
 const Hero = () => {
   return (
     <section className="bg-black w-full h-auto flex justify-center items-center flex-col">
-         <iframe
+         {/* <iframe
         src={`/index.html?timestamp=${new Date().getTime()}`}
         title="Embedded Content"
         width="100%"
@@ -12,18 +13,23 @@ const Hero = () => {
           border: "none",
           height: "100vh"
         }}
-      ></iframe>
-      {/* <Navbar />
-      <div className="bg-[url('/assets/heroSecton.svg')] h-full bg-no-repeat bg-center bg-cover w-full flex justify-center items-center flex-col">
+      ></iframe> */}
+      <Navbar />
+      <main className="bg-[#021221] h-screen bg-cover w-full ">
+
+        <div className="bg-[url('/assets/heroshadow.svg')] bg-no-repeat bg-center bg-cover h-full w-full flex justify-start items-center flex-col py-16">
+
         <div>
           <p className="text-white text-sm font-Onest">Introducing AlwaysPDF</p>
         </div>
-        <h1 className="text-white text-4xl font-semibold !font-Onest">Turn your boring documents into conversations</h1>
-        <p className="text-[#E2E8F0] font-Onest text-sm font-light">
-          Innovative. Intuitive. Insightful. Welcome to your AI-powered PDF
-          companion
+        <h1 className="text-white text-6xl font-semibold !font-Onest lg:max-w-[40%] text-center">Turn your boring documents into conversations</h1>
+        <p className="text-[#E2E8F0] font-Onest text-lg font-medium my-3">
+          Innovative. Intuitive. Insightful.
         </p>
-      </div> */}
+        <span className="text-white text-sm font-light">Welcome to your AI-powered PDF companion.</span>
+        </div>
+      </main>
+      <Image src="" alt="" />
     </section>
   );
 };

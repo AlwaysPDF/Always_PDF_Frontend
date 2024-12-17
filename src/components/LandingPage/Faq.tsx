@@ -62,21 +62,21 @@ const Faq = () => {
   ];
 
   return (
-    <section className="flex justify-center items-center w-full">
+    <section className="flex justify-center items-center w-full bg-[#021221]">
       <div className="flex justify-center items-center flex-col w-[80%] llg:w-[95%]">
         <aside className="relative w-[10%] flex justify-center items-center mt-20">
-          <h1 className="font-Ubuntu font-semibold text-basicBlue text-3xl">
+          <h1 className="font-Ubuntu font-semibold text-white text-3xl">
             FAQs
           </h1>
-          <span className="bg-[#FFC71F] h-[4px] w-full absolute z-[-3] bottom-[10px] "></span>
+          {/* <span className="bg-[#FFC71F] h-[4px] w-full absolute z-[-3] bottom-[10px] "></span> */}
         </aside>
-        <div className="flex justify-center items-center w-[70%] llg:w-full bg-[#F7FBFF] mt-6 mb-20">
+        <div className="flex justify-center items-center w-[70%] llg:w-full  mt-6 mb-20">
           <div className="grid grid-cols-1 gap-10 w-[90%] justify-between items-center flex-col py-10">
             <div className="">
               {items.map((item, index) => (
                 <div
                   key={index}
-                  className="mb-6 px-4 py-4 border-b border-[#DDDDDD]"
+                  className="mb-4 px-4 py-4 bg-[#141F49] rounded-md"
                 >
                   <div
                     //   className='d-flex gap-3 points mb-1 align-items-start'
@@ -86,8 +86,8 @@ const Faq = () => {
                     onClick={() => handleClick(index)}
                   >
                     <h5
-                      className={`text-start w-full mb-4 ${
-                        openSections[index] ? "text-offblack" : "text-offblack"
+                      className={`text-start w-full ${
+                        openSections[index] ? "text-white" : "text-white"
                       }`}
                     >
                       <b>{item.title}</b>
@@ -98,14 +98,13 @@ const Faq = () => {
                         openSections[index] ? "" : ""
                       }`}
                     >
-                      {openSections[index] ? <FaPlus /> : <FaMinus />}
+                      {openSections[index] ? <FaPlus className="text-white" /> : <FaMinus className="text-white" />}
                     </p>
                   </div>
                   <div
-                    style={{ display: openSections[index] ? "none" : "flex" }}
-                    className="gap-sm-3 contcurri"
+                    className={`gap-sm-3 contcurri ${openSections[index] ? "hidden" : "flex mt-4"}`}
                   >
-                    <p className="mb-0">{item.content}</p>
+                    <p className="mb-0 text-white text-sm">{item.content}</p>
                   </div>
                 </div>
               ))}

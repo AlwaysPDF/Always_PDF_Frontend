@@ -16,7 +16,7 @@ const DashBigSideNav = () => {
     setShowSidebar?.(!showSidebar);
   };
   return (
-    <div className="shadow-[1px_0px_0px_0px_rgba(0,0,0,0)]">
+    <div className="shadow-[1px_0px_0px_0px_rgba(0,0,0,0)] z-[9999999999999]">
       <div
         className={`dash sidebar-container noscrollbar bg-white border-r border-grey min-h-[100vh] h-[100%] lg:w-[220px] w-[220px] py-0 overflow-y-hidden fixed ml-0 lg:flex md:px-0 transition-all duration-500 ease-in-out
           ${

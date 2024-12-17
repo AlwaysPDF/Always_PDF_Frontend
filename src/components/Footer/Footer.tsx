@@ -22,12 +22,17 @@ const Footer = () => {
 
   const year = new Date().getFullYear();
   return (
-    <section className="flex justify-center items-center w-full bg-basicBlue">
+    <section className="flex justify-center items-center w-full bg-[#141F49]">
       <div className="w-[80%] llg:w-[95%] flex justify-between llg:justify-center items-start flex-col pt-14">
-        <main className="grid lg:grid-cols-4  lsm:grid-cols-1 md:grid-cols-2 gap-6">
+        <main className="grid lg:grid-cols-2 lsm:grid-cols-1 md:grid-cols-1 gap-6 w-full">
           <div className="flex justify-start items-start flex-col">
-            <Image src={footerLogo} alt="Always PDF White Logo" style={{ filter: "brightness(0) invert(1)" }} priority />
-            <div className="flex justify-center items-center gap-6 mt-2">
+            <Image
+              src={footerLogo}
+              alt="Always PDF White Logo"
+              style={{ filter: "brightness(0) invert(1)" }}
+              priority
+            />
+            <div className="flex justify-center items-center gap-4 mt-4">
               {socialLinks?.map((item, i) => (
                 <a key={i} href={item?.links}>
                   {item?.icon}
@@ -35,14 +40,38 @@ const Footer = () => {
               ))}
             </div>
           </div>
-          <div>
+          <div className="flex gap-8 lmd:flex-col uppercase">
             {hashLinks?.map((item, i) => (
-              <p key={i} className="text-white font-Ubuntu text-lg llg:text-base mb-4">
+              <p
+                key={i}
+                className="text-white font-Ubuntu text-lg llg:text-base mb-4"
+              >
                 {item?.name}
               </p>
             ))}
           </div>
-          <div>
+          {/* <div>
+            {[
+              "About EverPDF",
+              "Privacy Policy",
+              "Terms of Service",
+              "Contact Us",
+            ]?.map((item, i) => (
+              <p key={i} className="text-white font-Ubuntu text-lg llg:text-base mb-4">
+                {item}
+              </p>
+            ))}
+          </div> */}
+          {/* <div>
+            <p className="text-white text-sm  font-Ubuntu">
+              Copyright &copy; {year} alwayspdf.com. All rights reserved
+            </p>
+          </div> */}
+        </main>
+        <hr className="bg-white w-full my-14" />
+        <main className="w-full">
+          {/* <Image src={bigLogo} alt="Always PDF White Big Logo" priority /> */}
+          <div className="flex justify-center items-center w-full gap-10">
             {[
               "About EverPDF",
               "Privacy Policy",
@@ -54,14 +83,7 @@ const Footer = () => {
               </p>
             ))}
           </div>
-          <div>
-            <p className="text-white text-sm  font-Ubuntu">
-              Copyright &copy; {year} alwayspdf.com. All rights reserved
-            </p>
-          </div>
-        </main>
-        <main className="mt-16">
-          <Image src={bigLogo} alt="Always PDF White Big Logo" priority />
+            <p className="text-center text-white mb-8 mt-10">Copyright © {year} alwayspdf.com. All rights reserved</p>
         </main>
       </div>
     </section>

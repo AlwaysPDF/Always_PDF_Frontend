@@ -1,4 +1,4 @@
-import { EnterpriseTick, FreeTick, PremiumTick } from "@/utils/Icon";
+import { Tick } from "@/utils/Icon";
 import React from "react";
 
 const PriceList = () => {
@@ -43,31 +43,31 @@ const PriceList = () => {
     },
   ];
   return (
-    <section className="flex justify-center items-center w-full">
-      <div className="flex justify-center items-center flex-col w-[80%] llg:w-[90%] lmd:w-[95%] bg-gradient-price py-14 rounded-lg">
-        <aside className="relative  w-[13%] lmd:w-[60%] lsm:w-full flex justify-center items-center flex-col mb-2">
-          <h1 className="font-Ubuntu font-semibold text-basicBlue text-3xl lmd:text-2xl">
+    <section className="flex justify-center items-center w-full bg-[#021221]">
+      <div className="flex justify-center items-center flex-col w-[90%] llg:w-[95%] lmd:w-[95%] py-14 rounded-lg">
+        <aside className="flex justify-center items-center flex-col mb-2">
+          <h1 className="font-Ubuntu font-semibold text-white text-3xl lmd:text-2xl">
             Pricing
           </h1>
-          <span className="bg-[#FFC71F] h-[4px] w-full absolute z-[-3] bottom-[10px] "></span>
+          {/* <span className="bg-[#FFC71F] h-[4px] w-full absolute z-[-3] bottom-[10px] "></span> */}
         </aside>
-        <p className="mb-12 text-center">
+        <p className="mb-12 text-center text-white">
           Choose the plan that best fits your needs and unlock the full
           potential of your PDFs with EverPDF. <br />
           Note: All plans come with a 14-day free trial
         </p>
-        <main className="grid grid-cols-3 lmd:grid-cols-1 gap-0 border w-[90%] justify-center">
+        <main className="grid grid-cols-3 lmd:grid-cols-1 gap-10 w-[90%] justify-center">
           {lists?.map((item, i) => (
             <div
-              className={`flex justify-center items-center rounded-xl ${i === 1 ? "box-content py-14" : "box-border"} ${item?.name === "Premium Plan" && "text-white"} ${item?.className}`}
+              className={`flex justify-center items-start rounded-2xl text-white bg-[#141F49] py-4 h-full bg-[url('/assets/priceline.svg')] bg-no-repeat bg-right-bottom`}
               key={i}
             >
-              <aside className="w-[90%]">
+              <aside className="w-[90%] flex h-full flex-col">
                 <div
-                  className={`border-b py-2 ${item?.name !== "Premium Plan" ? "border-[#3EB489]" : "border-[#FFA90C]"}`}
+                  className={`border-b py-2 border-white`}
                 >
                   <h3
-                    className={`font-Ubuntu font-semibold mb-5 ${item.name === "Premium Plan" ? "text-[#FFD381]" : item.name === "Enterprise Plan" ? "text-[#0070E0]" : "text-offblack"}`}
+                    className={`font-Ubuntu font-semibold mb-5 text-white`}
                   >
                     {item?.name}{" "}
                     <small className="text-[14px] font-Ubuntu">
@@ -75,7 +75,7 @@ const PriceList = () => {
                     </small>
                   </h3>
                   <h4
-                    className={`font-Ubuntu text-xl font-semibold ${item.name === "Premium Plan" ? "text-white" : "text-offblack"} ${item?.name !== "Enterprise Plan" ? "font-semibold" : "font-medium"}`}
+                    className={`font-Ubuntu text-xl font-semibold text-white ${item?.name !== "Enterprise Plan" ? "font-semibold" : "font-medium"}`}
                   >
                     {item?.name !== "Enterprise Plan" && "$"}
                     {item?.price}{" "}
@@ -88,6 +88,7 @@ const PriceList = () => {
                     </small>
                   </h4>
                 </div>
+                <aside className="flex flex-col justify-between h-full">
                 <div className="mt-4">
                   <h1 className="mb-4">Features</h1>
                   <div>
@@ -96,27 +97,29 @@ const PriceList = () => {
                         key={i}
                         className="mb-4 flex justify-start items-center"
                       >
-                        {item?.name === "Free Plan" ? (
+                        <Tick />
+                        {/* {item?.name === "Free Plan" ? (
                           <FreeTick />
                         ) : item?.name === "Premium Plan" ? (
                           <PremiumTick />
                         ) : (
                           <EnterpriseTick />
-                        )}
+                        )} */}
                         <p className="ml-2">{feats}</p>
                       </div>
                     ))}
                   </div>
                 </div>
-                <div>
+                <div className="mt-auto flex justify-end flex-end">
                   <button
-                    className={`w-full rounded-md py-2 ${item?.name === "Premium Plan" ? "bg-white text-basicBlue" : "bg-basicBlue text-white"}`}
+                    className={`w-full rounded-md py-2 bg-[#0070E0] text-white`}
                   >
                     {item?.name !== "Enterprise Plan"
                       ? "Get Started"
                       : "Contact Us"}
                   </button>
                 </div>
+                </aside>
               </aside>
             </div>
           ))}

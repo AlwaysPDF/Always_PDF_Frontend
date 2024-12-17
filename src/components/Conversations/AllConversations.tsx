@@ -8,7 +8,7 @@ import ChatContainer from "./ChatContainer";
 import DocViewer, {
   DocViewerRenderers,
 } from "react-doc-viewer";
-import { Document, Page } from 'react-pdf';
+// import { Document, Page } from 'react-pdf';
 // import FileViewer from "react-file-viewer";
 import { axiosInstanceWithHeader } from "@/utils/AxiosHeader";
 
@@ -80,9 +80,9 @@ const AllConversations: React.FC<Token> = ({ token }) => {
       ) : (
         <div className="grid grid-cols-2 llg:grid-cols-1 gap-4 llg:gap-2 w-full">
           <aside className="w-full bg-white rounded-xl flex justify-center items-center">
-            <Document file="https://firebasestorage.googleapis.com/v0/b/alwayspdf-8bb50.appspot.com/o/documents%2FMantra_MFS100_RD_Service_Manual_Windows_1.1.0.pdf-6986523105?alt=media&token=f9373df9-b9de-4ad1-82fa-544c21489899" onLoadSuccess={onDocumentLoadSuccess}>
+            {/* <Document file="https://firebasestorage.googleapis.com/v0/b/alwayspdf-8bb50.appspot.com/o/documents%2FMantra_MFS100_RD_Service_Manual_Windows_1.1.0.pdf-6986523105?alt=media&token=f9373df9-b9de-4ad1-82fa-544c21489899" onLoadSuccess={onDocumentLoadSuccess}>
               <Page pageNumber={pageNumber} />
-            </Document>
+            </Document> */}
             {/* <DocViewer
               documents={docs}
               pluginRenderers={DocViewerRenderers}
