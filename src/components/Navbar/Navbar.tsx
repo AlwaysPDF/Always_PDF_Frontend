@@ -78,7 +78,7 @@ const Navbar = () => {
               href="/auth/email"
               className="text-[#EAF5FF] bg-basicBlue px-4 py-2 rounded-md"
             >
-              Create a free account
+              Create a Free Account
             </Link>
           </aside>
         )}
