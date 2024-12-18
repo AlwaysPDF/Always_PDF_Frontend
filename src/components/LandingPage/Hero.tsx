@@ -53,24 +53,24 @@ const Hero = () => {
     //   </div>
     // </section>
 
-    <section className="bg-[#021221] w-full flex justify-center items-center flex-col lmd:mt-14">
+    <section className="bg-[#021221] w-full flex justify-center items-center flex-col">
       <Navbar />
-      <main className="bg-[#021221] lg:min-h-[60vh] bg-coer w-full flex justify-center items-center">
-        <div className="bg-[url('/assets/heroshadow.svg')] bg-no-repeat bg-center bg-cover h-full w-full flex justify-center items-center flex-col py-16">
-          <div className="text-white bg-black border border-white text-xs font-Onest rounded-full px-4 py-1 flex justify-center items-center gap-2">
+      <main className="bg-[#021221] w-full flex justify-center items-center">
+        <div className="bg-[url('/assets/heroshadow.svg')] min-h-[90vh] bg-no-repeat bg-center bg-cover h-full w-full flex justify-center items-center flex-col py-16">
+          <div className="text-white bg-black border border-white text-xs font-Onest rounded-full px-4 py-1 flex justify-center items-center gap-2 mb-4 mt-6">
             <p >
               Introducing AlwaysPDF
             </p>
             <div className="size-[15px] bg-white rounded-full flex justify-center items-center"><i className="fa-solid fa-arrow-right -rotate-45 text-basicBlue"></i></div>
           </div>
-          <h1 className="text-white lg:text-7xl md:text-4xl lmd:text-3xl lg:leading-[5rem] font-semibold !font-Onest lg:max-w-[50%] text-center">
+          <h1 className="text-white md:text-7xl sm:text-5xl lmd:text-5xl lg:leading-[5rem] font-semibold !font-Onest lg:max-w-[60%] md:max-w-[75%] max-w-[90%] text-center">
             Turn your boring documents into conversations
           </h1>
           {/* <p className="text-[#E2E8F0] font-Onest text-lg font-medium my-2">
             Innovative. Intuitive. Insightful.
           </p> */}
-          <span className="text-white text-sm font-light text-center lg:max-w-[40%] w-[90%] mt-2 font-Inter">
-            Ask questions, get instant answers, and uncover insights effortlessly. With AlwaysPDF, your documents finally talk back
+          <span className="text-white font-light text-center lg:max-w-[40%] md:max-w-[576px] w-[90%] mt-3 font-Inter lsm:text-sm">
+            Ask questions, get instant answers, and uncover insights effortlessly. <br /> With AlwaysPDF, your documents can finally talk to you
           </span>
 
           <button

@@ -33,8 +33,8 @@ const Navbar = () => {
 
   return (
     <nav className="flex justify-center items-center w-full lmd:fixed lmd:top-0 lmd:bg-[#021221] z-[9999999]">
-      <div className="drop-shadow-[0px_4px_60px_0px_#FFFFFF_inset] flex justify-between items-center w-[90%] py-4 px-4 rounded-md ">
-        <aside className="w-[12%] llg:w-[40%] flex justify-center items-center">
+      <div className="drop-shadow-[0px_4px_60px_0px_#FFFFFF_inset] flex justify-between items-center w-[90%] lmd:w-[95%] py-4 px-4 rounded-md ">
+        <aside className="w-[12%] llg:w-[40%] flex justify-start items-center">
           <Link href="/">
             <Image
               src={fullColorLogo}
@@ -137,7 +137,7 @@ const Navbar = () => {
                   href="/auth/email"
                   className="text-[#EAF5FF] bg-basicBlue px-4 py-2 rounded-md"
                 >
-                  Create a free acount
+                  Create a free account
                 </Link>
               </aside>
             )}
