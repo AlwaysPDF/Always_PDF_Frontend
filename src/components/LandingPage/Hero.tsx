@@ -70,7 +70,7 @@ const Hero = () => {
             Innovative. Intuitive. Insightful.
           </p> */}
           <span className="text-white font-light text-center lg:max-w-[40%] md:max-w-[576px] w-[90%] mt-3 font-Inter lsm:text-sm">
-            Ask questions, get instant answers, and uncover insights effortlessly. <br /> With AlwaysPDF, your documents can finally talk to you
+            Ask questions, get instant answers, and uncover insights effortlessly. <br /> With AlwaysPDF, your documents can finally talk to you.
           </span>
 
           <button
