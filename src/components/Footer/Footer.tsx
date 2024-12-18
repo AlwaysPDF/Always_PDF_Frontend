@@ -1,23 +1,37 @@
 import Image from "next/image";
+import { ReactNode } from "react";
 import footerLogo from "../../../public/assets/coloredLogo.svg";
-import bigLogo from "../../../public/assets/bigLogo.svg";
+// import bigLogo from "../../../public/assets/bigLogo.svg";
 
 import { FaFacebook, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { AiFillInstagram } from "react-icons/ai";
 
+type SocialLink = {
+  icon: ReactNode; // To handle JSX elements like icons
+  link: string;
+};
+
+type HashLink = {
+  name: string;
+  hashLink: string;
+};
+
 const Footer = () => {
-  const socialLinks = [
-    { icon: <FaFacebook className="text-white text-2xl" />, links: "" },
-    { icon: <FaLinkedin className="text-white text-2xl" />, links: "" },
-    { icon: <FaXTwitter className="text-white text-2xl" />, links: "" },
-    { icon: <AiFillInstagram className="text-white text-2xl" />, links: "" },
+  const socialLinks: SocialLink[] = [
+    { icon: <FaFacebook className="text-white text-2xl" />, link: "#" },
+    {
+      icon: <FaLinkedin className="text-white text-2xl" />,
+      link: "https://www.linkedin.com/company/alwayspdf",
+    },
+    { icon: <FaXTwitter className="text-white text-2xl" />, link: "#" },
+    { icon: <AiFillInstagram className="text-white text-2xl" />, link: "#" },
   ];
 
-  const hashLinks = [
-    { name: "Home", hashlink: "" },
-    { name: "Features", hashlink: "" },
-    { name: "How it works", hashlink: "" },
-    { name: "Pricing", hashlink: "" },
+  const hashLinks: HashLink[] = [
+    { name: "Home", hashLink: "#" },
+    { name: "Features", hashLink: "#" },
+    { name: "How it works", hashLink: "#" },
+    { name: "Pricing", hashLink: "#" },
   ];
 
   const year = new Date().getFullYear();
@@ -33,15 +47,15 @@ const Footer = () => {
               priority
             />
             <div className="flex justify-center items-center gap-4 mt-4">
-              {socialLinks?.map((item, i) => (
-                <a key={i} href={item?.links}>
+              {socialLinks?.map((item: SocialLink, i: number) => (
+                <a key={i} href={item?.link}>
                   {item?.icon}
                 </a>
               ))}
             </div>
           </div>
           <div className="flex gap-8 lmd:gap-4 lmd:flex-col uppercase lmd:hidden">
-            {hashLinks?.map((item, i) => (
+            {hashLinks?.map((item: HashLink, i: number) => (
               <p
                 key={i}
                 className="text-white font-Ubuntu text-lg llg:text-base mb-4"
@@ -71,7 +85,7 @@ const Footer = () => {
         <hr className="bg-white w-full my-14" />
         <main className="w-full">
           {/* <Image src={bigLogo} alt="Always PDF White Big Logo" priority /> */}
-          <div className="flex justify-center items-center w-full gap-10 lmd:gap-4 lmd:flex-col lmd:hidden">
+          {/* <div className="flex justify-center items-center w-full gap-10 lmd:gap-4 lmd:flex-col lmd:hidden">
             {[
               "About AlwaysPDF",
               "Privacy Policy",
@@ -82,8 +96,10 @@ const Footer = () => {
                 {item}
               </p>
             ))}
-          </div>
-            <p className="text-center text-white mb-8 md:mt-10 lsm:text-sm">Copyright © {year} alwayspdf.com. All rights reserved</p>
+          </div> */}
+          <p className="text-center text-white mb-8 lsm:text-sm">
+            Copyright © {year} alwayspdf.com. All rights reserved
+          </p>
         </main>
       </div>
     </section>
