@@ -33,7 +33,7 @@ const Navbar = () => {
 
   return (
     <nav className="flex justify-center items-center w-full lmd:fixed lmd:top-0 lmd:bg-[#021221] z-[9999999]">
-      <div className="drop-shadow-[0px_4px_60px_0px_#FFFFFF_inset] flex justify-between items-center w-[90%] lmd:w-[95%] py-4 px-4 rounded-md ">
+      <div className="drop-shadow-[0px_4px_60px_0px_#FFFFFF_inset] flex justify-between items-center w-[90%] lmd:w-[95%] py-4 rounded-md">
         <aside className="w-[12%] llg:w-[40%] flex justify-start items-center">
           <Link href="/">
             <Image
@@ -45,11 +45,11 @@ const Navbar = () => {
             />
           </Link>
         </aside>
-        <aside className="hidden lg:flex justify-center items-center">
-          <ul className="flex justify-center items-center flex-col md:flex-row gap-14">
+        <aside className="hidden lg:flex justify-center items-center text-center">
+          <ul className="flex justify-center items-center flex-col md:flex-row gap-16">
             {links?.map((item, i) => (
               <li
-                className=" last:mr-0 text-white text-[16px] font-Ubuntu font-semibold cursor-pointer"
+                className="text-white text-sm font-Ubuntu font-semibold cursor-pointer"
                 key={i}
               >
                 <Link href={item?.point}>{item?.name}</Link>
@@ -57,32 +57,33 @@ const Navbar = () => {
             ))}
           </ul>
         </aside>
-        {token !== null ? (
-          <>
-            <Link
-              href="/dashboard/my-documents"
-              className="text-[#EAF5FF] bg-basicBlue px-6 py-2 rounded-md hidden md:block"
-            >
-              My Documents
-            </Link>
-          </>
-        ) : (
-          <aside className="hidden md:flex justify-center items-center">
-            <Link
-              href="/auth/signin"
-              className="bg-[#EAF5FF] border border-basicBlue text-basicBlue px-4 mr-4 py-2 rounded-md"
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/auth/email"
-              className="text-[#EAF5FF] bg-basicBlue px-4 py-2 rounded-md"
-            >
-              Create a Free Account
-            </Link>
-          </aside>
-        )}
-
+        <aside className="">
+          {token !== null ? (
+            <>
+              <Link
+                href="/dashboard/my-documents"
+                className="text-[#EAF5FF] bg-basicBlue px-6 py-2 rounded-md hidden md:block"
+              >
+                My Documents
+              </Link>
+            </>
+          ) : (
+            <aside className="hidden md:flex justify-center items-center">
+              <Link
+                href="/auth/signin"
+                className="bg-[#EAF5FF] border border-basicBlue text-basicBlue px-4 mr-4 py-2 rounded-md"
+              >
+                Sign In
+              </Link>
+              <Link
+                href="/auth/email"
+                className="text-[#EAF5FF] bg-basicBlue px-4 py-2 rounded-md"
+              >
+                Create a Free Account
+              </Link>
+            </aside>
+          )}
+        </aside>
         {/* Nav Buttons */}
         {/* Nav Buttons */}
 

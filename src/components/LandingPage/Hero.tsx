@@ -57,7 +57,7 @@ const Hero = () => {
       <Navbar />
       <main className="bg-[#021221] w-full flex justify-center items-center">
         <div className="bg-[url('/assets/heroshadow.svg')] min-h-[90vh] bg-no-repeat bg-center bg-cover h-full w-full flex justify-center items-center flex-col py-16">
-          <div className="text-white bg-black border border-white text-xs font-Onest rounded-full px-4 py-1 flex justify-center items-center gap-2 mb-4 mt-6">
+          <div className="text-white bg-[#021221] border-[.5px] border-white text-xs font-Onest rounded-full px-4 py-1 flex justify-center items-center gap-2 mb-4 mt-6">
             <p >
               Introducing AlwaysPDF
             </p>
