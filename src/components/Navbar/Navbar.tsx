@@ -13,6 +13,7 @@ const Navbar = () => {
     { name: "Features", point: "#features" },
     { name: "How it works", point: "#how-it-works" },
     { name: "Pricing", point: "#pricing" },
+    { name: "FAQs", point: "#faq" },
   ];
 
   const [nav, setNav] = useState(false);
@@ -46,7 +47,7 @@ const Navbar = () => {
           </Link>
         </aside>
         <aside className="hidden lg:flex justify-center items-center text-center">
-          <ul className="flex justify-center items-center flex-col md:flex-row gap-16">
+          <ul className="flex justify-center items-center flex-col md:flex-row gap-14">
             {links?.map((item, i) => (
               <li
                 className="text-white text-sm font-Ubuntu font-semibold cursor-pointer"
