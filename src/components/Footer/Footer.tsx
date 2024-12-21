@@ -24,7 +24,7 @@ const Footer = () => {
       link: "https://www.linkedin.com/company/alwayspdf",
     },
     { icon: <FaXTwitter className="text-white text-2xl" />, link: "#" },
-    { icon: <AiFillInstagram className="text-white text-2xl" />, link: "#" },
+    { icon: <AiFillInstagram className="text-white text-2xl" />, link: "https://www.instagram.com/alwayspdf/" },
   ];
 
   const hashLinks: HashLink[] = [
@@ -48,7 +48,7 @@ const Footer = () => {
             />
             <div className="flex justify-center items-center gap-4 mt-4">
               {socialLinks?.map((item: SocialLink, i: number) => (
-                <a key={i} href={item?.link}>
+                <a key={i} href={item?.link} target="_blank" rel="noopener noreferrer">
                   {item?.icon}
                 </a>
               ))}
