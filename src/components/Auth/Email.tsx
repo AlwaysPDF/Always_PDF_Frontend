@@ -134,7 +134,7 @@ const Email = () => {
     <section className="flex justify-center items-center w-full bg-white rounded-xl border border-[#DEDEDE]">
       <div className="flex justify-center items-center flex-col w-[90%] py-8">
         <AuthHeader isAuth="email" />
-        <form className="w-full flex justify-center items-center mb-[14rem] flex-col">
+        <form className="w-full flex justify-center items-center mb-[10rem] flex-col">
           <FormRow
             type="email"
             name="email"

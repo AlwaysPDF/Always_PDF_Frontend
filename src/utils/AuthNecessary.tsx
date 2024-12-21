@@ -32,7 +32,9 @@ export const AuthHeader: React.FC<IsAuthNecessary> = ({ isAuth }) => {
               ? "Verify your email address"
               : isAuth === "create"
                 ? "Input your details to create your profile"
-                : "Glad to have you back!"}
+                : isAuth === "forgot"
+                  ? "Forgot your password?" : isAuth == "change" ? "Input your new set of password"
+                  : "Glad to have you back!"}
         </p>
         <h1 className="text-basicBlue font-Ubuntu font-semibold text-xl mb-6 text-center">
           {isAuth === "email"
@@ -41,7 +43,9 @@ export const AuthHeader: React.FC<IsAuthNecessary> = ({ isAuth }) => {
               ? "Enter the OTP sent to your Email"
               : isAuth === "create"
                 ? "Account Creation"
-                : "Sign In to your account"}
+                : isAuth === "forgot"
+                  ? "Enter email to reset your password" : isAuth === "change" ? "Change Password"
+                  : "Sign In to your account"}
         </h1>
       </div>
     </section>
@@ -67,9 +71,13 @@ export const AuthButton: React.FC<IsButton> = ({
         ) : isAuth === "email" ? (
           "Next"
         ) : isAuth === "verify" ? (
-          "Confirm"
+          "Conitnue"
         ) : isAuth === "create" ? (
           "Sign Up"
+        ) : isAuth === "forgot" ? (
+          "Continue"
+        ) : isAuth === "change" ? (
+          "Save"
         ) : (
           "Sign In"
         )}
@@ -87,9 +95,15 @@ export const AuthIsSignUp: React.FC<IsAuthNecessary> = ({ isAuth }) => {
           : "Don't have an account?"}
         <Link
           className="ml-2 text-basicBlue font-Ubuntu font-semibold"
-          href={(isAuth !== "email" && isAuth !== "signin") ? "/auth/signin" : "/auth/email"}
+          href={
+            isAuth !== "email" && isAuth !== "signin"
+              ? "/auth/signin"
+              : "/auth/email"
+          }
         >
-          {(isAuth !== "email" && isAuth !== "signin") ? "Sign In" : "Sign up here!"}
+          {isAuth !== "email" && isAuth !== "signin"
+            ? "Sign In"
+            : "Sign up here!"}
         </Link>
       </p>
     </div>

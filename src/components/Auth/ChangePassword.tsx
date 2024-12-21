@@ -17,12 +17,11 @@ interface FormErrors {
 }
 
 interface UserDetails {
-  fName: string;
-  lName: string;
-  password: string;
+  newPassword: string;
+  confirmPassword: string;
 }
 
-const AccountCreation = () => {
+const ChangePassword = () => {
   const {
     showToast,
     setShowToast,
@@ -34,47 +33,46 @@ const AccountCreation = () => {
     isActive,
     setIsActive,
     handleToastClose,
-    setLoadingActive,
+        setLoadingActive,
     criteria,
     setCriteria,
-    userDetails,
-    setUserDetails,
   } = useAppContext();
+  const [userDetails, setUserDetails] = useState<UserDetails>({
+    newPassword: "",
+    confirmPassword: "",
+  });
 
   const isUserDetailsKey = (key: string): key is keyof UserDetails => {
-    return ["fName", "lName", "password"].includes(key);
+    return ["newPassword", "confirmPassword"].includes(key);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     const newUserDetails = { ...userDetails, [name]: value || "" };
-    if (setUserDetails && newUserDetails) {
-      setUserDetails(newUserDetails); // Update userDetails state
-    }
+    setUserDetails?.(newUserDetails); // Update userDetails state
     if (setIsActive) {
-      const { fName = "", lName = "", password = "" } = newUserDetails;
+      const { newPassword = "", confirmPassword = "" } = newUserDetails;
 
       // Email validation regex
       // const emailIsValid = (email: string) =>
       //   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
       // Password validation regex: at least one lowercase, one uppercase, one number, one special character, and minimum 8 characters
-      const passwordIsValid = (password: string) =>
+      const passwordIsValid = (newPassword: string) =>
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/.test(
-          password
+          newPassword
         );
 
       // Check the validation for both fields
-      if (fName && lName && passwordIsValid(password)) {
+      if (passwordIsValid(newPassword) && confirmPassword) {
         setIsActive(true);
       } else {
         setIsActive(false);
       }
-      console.log(isActive);
     }
 
-    if (name === "password") {
+    if (name === "newPassword") {
       if (value) {
         setCriteria?.({
           hasLowerCase: /[a-z]/.test(value),
@@ -101,17 +99,13 @@ const AccountCreation = () => {
     // Validate the form values
     const errors: FormErrors = {};
     if (userDetails) {
-      (["fName", "lName", "password"] as const).forEach((field) => {
+      (["newPassword", "confirmPassword"] as const).forEach((field) => {
         if (isUserDetailsKey(field)) {
           const value = userDetails[field]?.trim() || "";
           if (!value) {
             console.error(`Error: Empty field - ${field}`);
             errors[field] = `${
-              field === "fName"
-                ? "First name"
-                : field === "lName"
-                  ? "Last name"
-                  : "password"
+              field === "newPassword" ? "Password" : "Confirm password"
               // field.charAt(0).toUpperCase() + field.slice(1)
             } is required.`;
             // if (validateEmail) {
@@ -124,6 +118,11 @@ const AccountCreation = () => {
           }
         }
       });
+
+      // Check if passwords match
+    if (userDetails.newPassword !== userDetails.confirmPassword) {
+        errors.confirmPassword = "Passwords do not match.";
+      } 
     }
     // ... validate other fields
     setFormErrors?.(errors);
@@ -136,37 +135,37 @@ const AccountCreation = () => {
       criteria?.hasNumber === true &&
       criteria?.hasMinLength === true
     ) {
-      setLoadingActive?.(true);
+        setLoadingActive?.(true);
 
       const email = Cookies.get("UserEmail");
 
       axiosInstance
-        .patch("/user/updateUser", { ...userDetails, email })
+        .patch("/auth/changePassword", { ...userDetails, email })
         .then((response) => {
           if (response?.data?.success === true) {
             window.location.href = "/auth/signin";
-            setToastMessage?.({
-              text: response?.data?.msg || "Account Created successfuly",
-              type: "success",
-            });
-            setShowToast?.(true);
+              setToastMessage?.({
+                text: response?.data?.msg || "Password changed successfuly",
+                type: "success",
+              });
+              setShowToast?.(true);
             // Redirect to home page
           } else {
-            setToastMessage?.({
-              text: response?.data?.msg || "Password doesn't match",
-              type: "error",
-            });
+              setToastMessage?.({
+                text: response?.data?.msg || "Incorrect credentials",
+                type: "error",
+              });
           }
         })
         .catch((err) => {
           setToastMessage?.({
-            text: err?.response?.data?.msg || "Error chamging password",
+            text: err?.response?.data?.msg || "Incorrect credentials",
             type: "error",
           });
           setShowToast?.(true);
         })
         .finally(() => {
-          setUserDetails?.({ fName: "", lName: "", password: "" });
+          setUserDetails?.({ newPassword: "", confirmPassword: "" });
 
           setCriteria?.({
             hasLowerCase: null,
@@ -187,40 +186,14 @@ const AccountCreation = () => {
   return (
     <section className="flex justify-center items-center w-full bg-white rounded-xl border border-[#DEDEDE]">
       <div className="flex justify-center items-center flex-col w-[90%] py-8">
-        <AuthHeader isAuth="create" />
+        <AuthHeader isAuth="change" />
         <form className="w-full flex justify-center items-center mb-8 flex-col">
           <FormRow
-            type="text"
-            name="fName"
-            value={userDetails?.fName}
-            placeHolder="First name"
-            labelText="First name"
-            formErrors={formErrors}
-            handleBlur={handleBlur}
-            handleChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-              handleChange?.(e)
-            }
-            bottom="mb-4"
-          />
-          <FormRow
-            type="text"
-            name="lName"
-            value={userDetails?.lName}
-            placeHolder="Last name"
-            labelText="Last name"
-            formErrors={formErrors}
-            handleBlur={handleBlur}
-            handleChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-              handleChange?.(e)
-            }
-            bottom="mb-4"
-          />
-          <FormRow
             type="password"
-            name="password"
-            value={userDetails?.password}
-            placeHolder="Input your password"
-            labelText="Password"
+            name="newPassword"
+            value={userDetails?.newPassword}
+            placeHolder="Input your new password"
+            labelText="New Password"
             password={true}
             formErrors={formErrors}
             handleBlur={handleBlur}
@@ -229,7 +202,7 @@ const AccountCreation = () => {
             }
             bottom="mb-2"
           />
-          <div className="mb-10 mt-2 font-Ubuntu w-full">
+          <div className="mb-4 mt-2 font-Ubuntu w-full">
             <p className="text-[#999999] mb-2 font-medium font-Ubuntu text-[16px]">
               Your password should contain:
             </p>
@@ -336,9 +309,22 @@ const AccountCreation = () => {
               Minimum of 8 characters
             </label>
           </div>
-          <AuthButton isActive={isActive} handleClick={handleClick} />
+          <FormRow
+            type="password"
+            name="confirmPassword"
+            value={userDetails?.confirmPassword}
+            placeHolder="Re-enter your password"
+            labelText="Confirm Password"
+            formErrors={formErrors}
+            handleBlur={handleBlur}
+            handleChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+              handleChange?.(e)
+            }
+            bottom="mb-10"
+          />
+          <AuthButton isAuth="change" isActive={isActive} handleClick={handleClick} />
         </form>
-        <AuthIsSignUp isAuth="signin" />
+        <AuthIsSignUp isAuth="change" />
       </div>
       {showToast && (
         <Toastify
@@ -351,4 +337,4 @@ const AccountCreation = () => {
   );
 };
 
-export default AccountCreation;
+export default ChangePassword;

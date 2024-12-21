@@ -4,56 +4,49 @@ import { AuthButton, AuthHeader, AuthIsSignUp } from "@/utils/AuthNecessary";
 import FormRow from "@/utils/FormRow";
 import Cookies from "js-cookie";
 import { useAppContext } from "../ContextApi/ContextApi";
-import Toastify from "@/utils/Toastify";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { axiosInstance } from "@/utils/AxiosHeader";
+import Toastify from "@/utils/Toastify";
 
 interface FormErrors {
   [key: string]: string;
 }
 
 interface UserDetails {
-  verificationToken: string;
+  email: string;
 }
 
-const OTP = () => {
+const InitiateForgotPassword = () => {
   const {
-    showToast,
-    setShowToast,
-    toastMessage,
-    setToastMessage,
-    formErrors,
-    setFormErrors,
-    handleBlur,
     isActive,
     setIsActive,
+    showToast,
+    setShowToast,
     handleToastClose,
-    loadingActive,
+    toastMessage,
+    setToastMessage,
+    handleBlur,
+    formErrors,
     setLoadingActive,
+    validateEmail,
+    setFormErrors,
   } = useAppContext();
 
   const isUserDetailsKey = (key: string): key is keyof UserDetails => {
-    return ["verificationToken"].includes(key);
+    return ["email"].includes(key);
   };
 
-  const [userDetails, setUserDetails] = useState<UserDetails>({
-    verificationToken: "",
-  });
+  const [userDetails, setUserDetails] = useState<UserDetails>({ email: "" });
 
   // the onchange function
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     // setincorrectpass(false);
-    if (name === "number") {
-      // Allow only numbers
-      if (!/^\d*$/.test(value)) return;
-    }
-
     if (userDetails) {
       setUserDetails?.({ ...userDetails, [name]: value }); // Type assertion (optional)
     }
     if (setIsActive) {
-      if (name === "verificationToken" && value.length < 4) {
+      if (name === "email" && value.length === 0) {
         setIsActive(false);
       } else {
         setIsActive(true);
@@ -67,13 +60,19 @@ const OTP = () => {
     // Validate the form values
     const errors: FormErrors = {};
     if (userDetails) {
-      (["verificationToken"] as const).forEach((field) => {
+      (["email"] as const).forEach((field) => {
         if (isUserDetailsKey(field)) {
           const value = userDetails[field]?.trim() || "";
-          if (!value) {
+          if (field === "email" && validateEmail && !validateEmail(value)) {
+            errors.email = "Invalid email address";
+          } else if (!value) {
             console.error(`Error: Empty field - ${field}`);
             errors[field] = `${
-              field === "verificationToken" && "OTP"
+              field === "email"
+                ? "Email address"
+                : field === "name"
+                  ? "Full name"
+                  : "Password"
               // field.charAt(0).toUpperCase() + field.slice(1)
             } is required.`;
             // if (validateEmail) {
@@ -90,19 +89,18 @@ const OTP = () => {
     // ... validate other fields
     setFormErrors?.(errors);
     // Set a cookie
-    if (
-      Object.keys(errors).length === 0 &&
-      userDetails.verificationToken.length === 4
-    ) {
-      setLoadingActive?.(true);
+    if (Object.keys(errors).length === 0) {
+        setLoadingActive?.(true);
 
-      const email = Cookies.get("UserEmail");
+      if (userDetails) {
+        Cookies.set("UserEmail", userDetails.email, { secure: true });
+      }
 
       axiosInstance
-        .post("/auth/verifyEmail", { ...userDetails, email })
+        .post("/auth/forgotPassword", userDetails)
         .then((response) => {
           if (response?.data?.success === true) {
-            window.location.href = "/auth/complete-signup";
+            window.location.href = "/auth/reset-verify";
             setToastMessage?.({
               text:
                 response?.data?.msg ||
@@ -113,20 +111,20 @@ const OTP = () => {
             // Redirect to home page
           } else {
             setToastMessage?.({
-              text: response?.data?.msg || "Email already exists",
+              text: response?.data?.msg || "Email not found",
               type: "error",
             });
           }
         })
         .catch((err) => {
           setToastMessage?.({
-            text: err?.response?.data?.msg || "Email already exists",
+            text: err?.response?.data?.msg || "Error sending email",
             type: "error",
           });
           setShowToast?.(true);
         })
         .finally(() => {
-          setUserDetails?.({ verificationToken: "" });
+          setUserDetails?.({ email: "" });
           setLoadingActive?.(false);
         });
     }
@@ -135,14 +133,14 @@ const OTP = () => {
   return (
     <section className="flex justify-center items-center w-full bg-white rounded-xl border border-[#DEDEDE]">
       <div className="flex justify-center items-center flex-col w-[90%] py-8">
-        <AuthHeader isAuth="verify" />
+        <AuthHeader isAuth="forgot" />
         <form className="w-full flex justify-center items-center mb-[10rem] flex-col">
           <FormRow
-            type="number"
-            name="verificationToken"
-            value={userDetails?.verificationToken}
-            placeHolder="Input OTP"
-            labelText="OTP"
+            type="email"
+            name="email"
+            value={userDetails?.email}
+            placeHolder="Input your e-mail address"
+            labelText="Email address"
             formErrors={formErrors}
             handleBlur={handleBlur}
             handleChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
@@ -151,7 +149,7 @@ const OTP = () => {
             bottom="mb-10"
           />
           <AuthButton
-            isAuth="verify"
+            isAuth="forgot"
             isActive={isActive}
             handleClick={handleClick}
           />
@@ -169,4 +167,4 @@ const OTP = () => {
   );
 };
 
-export default OTP;
+export default InitiateForgotPassword;
