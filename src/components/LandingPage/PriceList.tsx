@@ -1,6 +1,11 @@
-import { Tick } from "@/utils/Icon";
 import Link from "next/link";
-import React from "react";
+import { Tick } from "@/utils/Icon";
+import { loadStripe } from "@stripe/stripe-js";
+import { axiosInstanceWithHeader } from "@/utils/AxiosHeader";
+
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_LIVE || ""
+);
 
 const PriceList = () => {
   const lists = [
@@ -43,6 +48,30 @@ const PriceList = () => {
       className: "price-white",
     },
   ];
+
+  const handlePayment = async () => {
+    try {
+      const stripe = await stripePromise;
+  
+      // Use axiosInstanceWithHeader to make the API call
+      const response = await axiosInstanceWithHeader.post("/payment/create-checkout-session");
+  
+      const session = response.data;
+  
+      // Redirect to Checkout
+      const result = await stripe?.redirectToCheckout({
+        sessionId: session.id,
+      });
+  
+      if (result?.error) {
+        console.error(result.error.message);
+      }
+    } catch (error: any) {
+      console.error("Error during payment:", error);
+    }
+  };
+  
+
   return (
     <section className="flex justify-center items-center w-full bg-[#021221]">
       <div className="flex justify-center items-center flex-col w-[90%] llg:w-[95%] lmd:w-[95%] py-14 rounded-lg">
@@ -108,7 +137,7 @@ const PriceList = () => {
                     </div>
                   </div>
                   <div className="mt-auto flex justify-center text-center items-center ">
-                    {item.name !== "Enterprise Plan" && (
+                    {item.name === "Free Plan" && (
                       <Link
                         href="/auth/email"
                         className={`w-full rounded-md py-2 bg-[#0070E0] text-white`}
@@ -116,6 +145,14 @@ const PriceList = () => {
                         {" "}
                         Get Started
                       </Link>
+                    )}
+                    {item.name === "Premium Plan" && (
+                      <button
+                        className={`w-full rounded-md py-2 bg-[#0070E0] text-white`}
+                        onClick={handlePayment}
+                      >
+                        Get Started
+                      </button>
                     )}
                     {item.name === "Enterprise Plan" && (
                       <Link

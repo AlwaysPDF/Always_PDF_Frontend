@@ -62,7 +62,7 @@ export const AuthButton: React.FC<IsButton> = ({
   return (
     <div className="w-full flex justify-end items-center">
       <button
-        className={`button-shadow  px-12 py-2 text-white rounded-lg ${isActive ? "bg-deepblue" : "bg-grey"}`}
+        className={`button-shadow  px-12 py-2 text-white rounded-lg ${isActive ? "bg-basicBlue" : "bg-grey"}`}
         disabled={!isActive}
         onClick={handleClick}
       >
@@ -89,7 +89,7 @@ export const AuthButton: React.FC<IsButton> = ({
 export const AuthIsSignUp: React.FC<IsAuthNecessary> = ({ isAuth }) => {
   return (
     <div>
-      <p className="font-Ubuntu font-semibold text-sm ">
+      <p className="font-Ubuntu font-semibold text-sm text-basicBlue">
         {isAuth !== "signin"
           ? "Already have an account?"
           : "Don't have an account?"}
