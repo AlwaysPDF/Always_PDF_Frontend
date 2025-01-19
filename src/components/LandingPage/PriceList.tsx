@@ -57,14 +57,16 @@ const PriceList = () => {
       const response = await axiosInstanceWithHeader.post("/payment/create-checkout-session");
   
       // const session = response.data;
-      const { sessionId } = await response.data;
+      const {sessionId} = await response.data;
+      console.log(sessionId);
+      
 
     if (!sessionId) {
       throw new Error("Failed to create session");
     }
   
       // Redirect to Checkout
-      const result = await stripe?.redirectToCheckout({ sessionId });
+      const result = await stripe?.redirectToCheckout({ sessionId: sessionId });
   
       if (result?.error) {
         console.error(result.error.message);
