@@ -56,12 +56,15 @@ const PriceList = () => {
       // Use axiosInstanceWithHeader to make the API call
       const response = await axiosInstanceWithHeader.post("/payment/create-checkout-session");
   
-      const session = response.data;
+      // const session = response.data;
+      const { sessionId } = await response.data;
+
+    if (!sessionId) {
+      throw new Error("Failed to create session");
+    }
   
       // Redirect to Checkout
-      const result = await stripe?.redirectToCheckout({
-        sessionId: session.id,
-      });
+      const result = await stripe?.redirectToCheckout({ sessionId });
   
       if (result?.error) {
         console.error(result.error.message);
